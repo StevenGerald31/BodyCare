@@ -1,16 +1,21 @@
 const SparqlClient = require("sparql-http-client");
+const getBaseUrl = require("../../utils/getBaseUrl");
 
 const endpointUrl = "http://localhost:3030/tes/sparql";
 
 const executeQuery = async () => {
   const query = `
-    PREFIX tes: <http://www.semanticweb.org/gusve/ontologies/2023/10/untitled-ontology-40#>
+      PREFIX tes: <http://www.semanticweb.org/gusve/ontologies/2023/10/untitled-ontology-40#>
 
-    SELECT ?Usia ?Harga
-        WHERE {
-            ?dsn tes:Usia ?Usia;
-            tes:Harga ?Harga.
-        }
+      SELECT ?Merek_Bodycare ?Harga ?Usia
+      WHERE {
+          ?dsn tes:Merek_Bodycare ?Merek_Bodycare;
+              tes:Harga ?Harga;
+              tes:Usia ?Usia.
+          
+          FILTER (?Merek_Bodycare = "Sensatia Botanicals")
+      }
+  
     `;
 
   const client = new SparqlClient({ endpointUrl });
@@ -49,6 +54,28 @@ const getQueryResults = async (req, res) => {
   }
 };
 
+const pageTes = async (req, res) => {
+  try {
+    // Execute SPARQL query and get results
+    const results = await executeQuery();
+
+    // Render the 'viewCoba' with the query results
+    return res.render("dashboard", {
+      baseUrl: getBaseUrl(req),
+      session: req.session,
+      user: req.user,
+      queryResults: results, // Pass the query results to the view
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Terjadi Kesalahan Sistem",
+    });
+  }
+};
+
 module.exports = {
   getQueryResults,
+  pageTes,
 };
