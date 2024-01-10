@@ -196,5 +196,45 @@ const pageBeranda = async (req, res) => {
     });
   }
 };
+<<<<<<< HEAD
+const pageLogin = async (req, res) => {
+  try {
+    return res.render("login", {
+      baseUrl: getBaseUrl(req),
+      session: req.session,
+      user: req.user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Terjadi Kesalahan Sistem",
+    });
+  }
+};
+const pageAdmin = async (req, res) => {
+  try {
+    return res.render("admin", {
+      baseUrl: getBaseUrl(req),
+      session: req.session,
+      user: req.user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Terjadi Kesalahan Sistem",
+    });
+  }
+};
+module.exports = {
+  pageBeranda,
+  getDataFromOntology,
+  addToOntology,
+  pageLogin,
+  pageAdmin,
+};
+=======
 
 module.exports = { pageBeranda, getDataFromOntology };
+>>>>>>> efab6c5d83d7f6a593db865cae975e946e639b95
