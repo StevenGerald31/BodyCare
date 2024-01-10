@@ -116,10 +116,42 @@
                 <tr>
                   <th>Usia</th>
                   <th>harga</th>
-                  <th>Manfaat</th>
-                  <th>Masalah Kulit</th>
+                  <th>Detail</th>
                 </tr>
               </table>
+            </div>
+
+            <div class="row m-2">
+              <div id="card-list-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        data-backdrop="false"
+        id="exampleModal0"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-black" id="merekModal"></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <h5 class="fw-bold text-black">Manfaat</h5>
+              <p class="manfaat"></p>
+              <!-- Elemen dengan class 'manfaat' -->
+              <h5 class="fw-bold text-black">Masalah</h5>
+              <p class="masalah"></p>
             </div>
           </div>
         </div>
@@ -232,7 +264,191 @@
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                     style="width: 500px"
-                  ></ul>
+                  >
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        >Sensanatia Botanicals</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Herborist</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Alus</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Grace and Glow</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Marina</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Scarlett Whitening</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Erha</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Ratih</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- masalah Kulit -->
+            <div class="row mt-2">
+              <div class="col-sm-5 d-flex align-item-center">
+                <h2>Pilih Masalah Kulit:</h2>
+              </div>
+              <div class="col-md-7">
+                <div class="dropdown">
+                  <button
+                    class="btn bg-white"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <h6>Pilihan Masalah Kulit</h6>
+                    <img src="/images/dropdown.png" alt="" />
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton1"
+                    style="width: 500px"
+                  >
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        >Sensanatia Botanicals</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Herborist</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Alus</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Grace and Glow</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Marina</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Scarlett Whitening</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Erha</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Ratih</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-sm-5 d-flex align-item-center">
+                <h2>Pilih Usia:</h2>
+              </div>
+              <div class="col-md-7">
+                <div class="dropdown">
+                  <button
+                    class="btn bg-white"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <h6>Pilihan Usia</h6>
+                    <img src="/images/dropdown.png" alt="" />
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton1"
+                    style="width: 500px"
+                  >
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        >Sensanatia Botanicals</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Herborist</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Alus</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Grace and Glow</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Marina</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Scarlett Whitening</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Erha</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Ratih</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-sm-5 d-flex align-item-center">
+                <h2>Pilih Harga:</h2>
+              </div>
+              <div class="col-md-7">
+                <div class="dropdown">
+                  <button
+                    class="btn bg-white"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <h6>Pilihan Harga</h6>
+                    <img src="/images/dropdown.png" alt="" />
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton1"
+                    style="width: 500px"
+                  >
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        >Sensanatia Botanicals</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Herborist</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Alus</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Grace and Glow</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Marina</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Scarlett Whitening</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Erha</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Bali Ratih</a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -460,28 +676,43 @@
           table.deleteRow(1);
         }
 
-        // ambil data dari api dengan query merek
         fetch(`http://localhost:3000/web/api/query-by-merek?merek=${merek}`)
           .then((respons) => respons.json())
           .then((bodycareList) => {
             console.log(bodycareList[0]);
-            // masukan ke dalam tabel
-            bodycareList.forEach((bodycare) => {
+            // masukan ke dalam card list
+
+            bodycareList.forEach((bodycare, index) => {
+              // Table
               const row = table.insertRow(-1);
               const usiaCell = row.insertCell(0);
               const hargaCell = row.insertCell(1);
-              const manfaatCell = row.insertCell(2);
-              const masalahCell = row.insertCell(3);
+              const detailCell = row.insertCell(2); // Add this line
 
               usiaCell.innerHTML = bodycare.Usia.value;
               const parseharga = parseInt(bodycare.Harga.value);
               const formattedHarga = parseharga.toLocaleString("id-ID");
               hargaCell.innerHTML = `Rp${formattedHarga}`;
-              manfaatCell.innerHTML = bodycare.Manfaat.value;
-              masalahCell.innerHTML = bodycare.Masalah.value;
 
-              $("#selectedMerek").html(merek);
+              const detailButton = document.createElement("button");
+              detailButton.innerHTML = "Detail";
+              detailButton.className = "btn btn-primary";
+              detailButton.dataset.bsToggle = "modal";
+              detailButton.dataset.bsTarget = `#exampleModal0`;
+              detailCell.appendChild(detailButton);
+
+              detailButton.addEventListener("click", () => {
+                const modal = document.querySelector(`#exampleModal0`);
+                modal.querySelector(
+                  ".manfaat"
+                ).textContent = `${bodycare.Manfaat.value}`;
+                modal.querySelector(
+                  ".masalah"
+                ).textContent = `${bodycare.Masalah.value}`;
+              });
             });
+            $("#selectedMerek").html(merek);
+            $("#merekModal").html(merek);
           })
           .catch((error) => {
             console.error("Error fetching bodycare list:", error);

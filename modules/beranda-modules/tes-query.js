@@ -1,6 +1,5 @@
 const SparqlClient = require("sparql-http-client");
 const getBaseUrl = require("../../utils/getBaseUrl");
-const { get } = require("./beranda-router");
 
 const endpointUrl = "http://localhost:3030/tes/sparql";
 
@@ -36,13 +35,15 @@ const executeQueryByMerek = async (selectedMerek) => {
   const query = `
           PREFIX tes: <http://www.semanticweb.org/gusve/ontologies/2023/10/untitled-ontology-40#>
     
-          SELECT ?Usia ?Harga ?Manfaat (REPLACE(str(SUBSTR(str(?Masalah_Kulit), STRLEN(str(tes:)) + 1)), "_", " ") as ?Masalah)
+          SELECT ?Usia ?Nama_Produk ?Merek_Bodycare ?Harga ?Manfaat  (REPLACE(str(SUBSTR(str(?Masalah_Kulit), STRLEN(str(tes:)) + 1)), "_", " ") as ?Masalah)
           WHERE {
             ?dsn tes:Merek_Bodycare "${selectedMerek}" ;
                  tes:Harga ?Harga ;
+                 tes:hasProductName ?Nama_Produk ;
                  tes:Usia ?Usia ;
                  tes:Manfaat ?Manfaat;
-                 tes:hasSkinIssues ?Masalah_Kulit.
+                 tes:hasBodycareType ?Jenis_Bodycare;
+                 tes:hasSkinIssues ?Masalah_Kulit;
           }
       `;
 
@@ -70,6 +71,40 @@ const getMerekList = async () => {
   }
 };
 
+const getAllData = async () => {
+  try {
+    const query = `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX tes: <http://www.semanticweb.org/gusve/ontologies/2023/10/untitled-ontology-40#>
+        
+    SELECT ?Merek_Bodycare ?Masalah_Kulit ?Jenis_Bodycare ?Nama_Produk ?Usia ?Harga
+    WHERE {
+      ?Merek_Bodycare rdf:type tes:Merek_Bodycare.
+      ?Merek_Bodycare tes:hasProductName ?Nama_Produk .
+      ?Merek_Bodycare tes:hasAge ?Usia .
+      ?Nama_Produk tes:hasBodycareType ?Jenis_Bodycare .
+      ?Nama_Produk tes:hasPrice ?Harga .
+      ?Nama_Produk tes:hasSkinIssues ?Masalah_Kulit .
+      
+    }
+    `;
+    const results = await executeQuery(query);
+    const allData = results.map((row) => {
+      return {
+        merek: row.Merek_Bodycare.value,
+        masalah: row.Masalah_Kulit.value,
+        jenis: row.Jenis_Bodycare.value,
+        nama: row.Nama_Produk.value,
+        usia: row.Usia.value,
+        harga: row.Harga.value,
+      };
+    });
+    return allData;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const pageTes = async (req, res) => {
   try {
     return res.render("viewCoba", {
@@ -88,4 +123,5 @@ module.exports = {
   executeQueryByMerek,
   getMerekList,
   pageTes,
+  getAllData,
 };

@@ -541,3 +541,11 @@ section .container {
 .rekomendasi .content p:last-child {
   margin-bottom: 0;
 }
+
+.modal-body p {
+  color: black;
+}
+
+.modal-backdrop {
+  z-index: -1;
+}

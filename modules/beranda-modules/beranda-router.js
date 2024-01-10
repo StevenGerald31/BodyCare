@@ -33,4 +33,13 @@ router.get("/api/query-by-merek", async (req, res) => {
   }
 });
 
+router.get("/api/allData", async (req, res) => {
+  try {
+    const allData = await controller.getAllData();
+    res.json(allData);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
