@@ -390,36 +390,154 @@ section .container {
 }
 
 /*--------------------------------------------------------------
-# About
+# Penjelajahan
 --------------------------------------------------------------*/
-.about-me .content h3 {
+.penjelajahan .content h3 {
   font-weight: 700;
   font-size: 26px;
   color: #18d26e;
 }
 
-.about-me .content ul {
+.penjelajahan .content ul {
   list-style: none;
   padding: 0;
 }
 
-.about-me .content ul li {
-  margin-bottom: 20px;
+.penjelajahan .content ul li {
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
 
-.about-me .content ul strong {
+.penjelajahan .content ul strong {
   margin-right: 10px;
 }
 
-.about-me .content ul i {
+.penjelajahan .content ul i {
   font-size: 16px;
   margin-right: 5px;
   color: #18d26e;
   line-height: 0;
 }
 
-.about-me .content p:last-child {
+.penjelajahan .content p:last-child {
+  margin-bottom: 0;
+}
+
+.penjelajahan .dropdown .btn {
+  border-radius: 20px;
+  border: 1px solid var(--Neutral-Color-20, #ccd1d2);
+  background-color: #fff;
+  border-color: #ccd1d2;
+  color: #667479;
+  width: 500px;
+}
+
+.penjelajahan .dropdown .btn h6 {
+  margin-top: 10px;
+  float: inline-start;
+}
+
+.penjelajahan .dropdown .btn img {
+  margin-top: 10px;
+  float: inline-end;
+}
+
+.penjelajahan .dropdown-menu {
+  overflow-y: auto;
+  max-height: 150px;
+}
+
+/*--------------------------------------------------------------
+# Pencarian
+--------------------------------------------------------------*/
+.pencarian .content h3 {
+  font-weight: 700;
+  font-size: 26px;
+  color: #18d26e;
+}
+
+.pencarian .content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pencarian .content ul li {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.pencarian .content ul strong {
+  margin-right: 10px;
+}
+
+.pencarian .content ul i {
+  font-size: 16px;
+  margin-right: 5px;
+  color: #18d26e;
+  line-height: 0;
+}
+
+.pencarian .content p:last-child {
+  margin-bottom: 0;
+}
+
+.pencarian .dropdown .btn {
+  border-radius: 20px;
+  border: 1px solid var(--Neutral-Color-20, #ccd1d2);
+  background-color: #fff;
+  border-color: #ccd1d2;
+  color: #667479;
+  width: 500px;
+}
+
+.pencarian .dropdown .btn h6 {
+  margin-top: 10px;
+  float: inline-start;
+}
+
+.pencarian .dropdown .btn img {
+  margin-top: 10px;
+  float: inline-end;
+}
+
+.pencarian .dropdown-menu {
+  overflow-y: auto;
+  max-height: 150px;
+}
+
+/*--------------------------------------------------------------
+# Rekomendasi
+--------------------------------------------------------------*/
+.rekomendasi .content h3 {
+  font-weight: 700;
+  font-size: 26px;
+  color: #18d26e;
+}
+
+.rekomendasi .content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rekomendasi .content ul li {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.rekomendasi .content ul strong {
+  margin-right: 10px;
+}
+
+.rekomendasi .content ul i {
+  font-size: 16px;
+  margin-right: 5px;
+  color: #18d26e;
+  line-height: 0;
+}
+
+.rekomendasi .content p:last-child {
   margin-bottom: 0;
 }
