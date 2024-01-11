@@ -4,10 +4,13 @@ const dashboardController = require("./beranda-controller");
 const tes = require("./tes-controller");
 const controller = require("./tes-query");
 
-const ontology = require("./beranda-controller");
+// ini bagiian yang bisa dipake tanpa database
+router.get("/dashboard", dashboardController.pageDashboard);
+router.get("/admin", dashboardController.pageAdmin);
+router.get("/login", dashboardController.pageLogin);
 
-router.get("/dashboard", dashboardController.pageBeranda);
-router.get("/ontology-data", ontology.getDataFromOntology);
+// ini bagian orek orek semua
+
 router.get("/login", dashboardController.pageLogin);
 router.get("/admin", dashboardController.pageAdmin);
 // router.get("/ontology-data", ontology.getDataFromOntology);

@@ -127,13 +127,6 @@
                   <th>Usia</th>
                   <th>Harga</th>
                 </tr>
-                <% queryResults.forEach(row => { %>
-                <tr>
-                  <td><%= row.Merek_Bodycare.value %></td>
-                  <td><%= row.Usia.value %></td>
-                  <td><%= row.Harga.value %></td>
-                </tr>
-                <% }); %>
               </table>
             </div>
           </div>
@@ -179,12 +172,6 @@
                 <th>Usia</th>
                 <th>Harga</th>
               </tr>
-              <% queryResults.forEach(row => { %>
-              <tr>
-                <td><%= row.Usia.value %></td>
-                <td><%= row.Harga.value %></td>
-              </tr>
-              <% }); %>
             </table>
           </div>
         </div>
@@ -229,12 +216,6 @@
                 <th>Usia</th>
                 <th>Harga</th>
               </tr>
-              <% queryResults.forEach(row => { %>
-              <tr>
-                <td><%= row.Usia.value %></td>
-                <td><%= row.Harga.value %></td>
-              </tr>
-              <% }); %>
             </table>
           </div>
         </div>
@@ -387,58 +368,6 @@
           }
         });
       })();
-
-      function displayDataByMerek(selectedMerek) {
-        $.ajax({
-          url: "/api/query-by-merek?merek=" + selectedMerek,
-          method: "GET",
-          success: function (queryResults) {
-            // Update the table with query results
-            var tableBody = $("#resultTable tbody");
-            tableBody.empty(); // Clear existing rows
-            queryResults.forEach(function (row) {
-              tableBody.append(
-                "<tr><td>" +
-                  row.Usia.value +
-                  "</td><td>" +
-                  row.Harga.value +
-                  "</td></tr>"
-              );
-            });
-          },
-          error: function (error) {
-            console.error("Error fetching data by merek:", error);
-          },
-        });
-      }
-
-      // Fetch merek list from backend
-      $(document).ready(function () {
-        $.ajax({
-          url: "/api/merek",
-          method: "GET",
-          success: function (merekList) {
-            // Populate the dropdown with fetched merek list
-            merekList.forEach(function (merek) {
-              $("#merekDropdown").append(
-                "<option value='" + merek + "'>" + merek + "</option>"
-              );
-            });
-          },
-          error: function (error) {
-            console.error("Error fetching merek list:", error);
-          },
-        });
-
-        // Add event listener to the dropdown
-        $("#merekDropdown").change(function () {
-          var selectedMerek = $(this).val();
-          if (selectedMerek) {
-            // If a merek is selected, display data for that merek
-            displayDataByMerek(selectedMerek);
-          }
-        });
-      });
     </script>
   </body>
 </html>
