@@ -7,11 +7,9 @@ const controller = require("./tes-query");
 const ontology = require("./beranda-controller");
 
 router.get("/dashboard", dashboardController.pageBeranda);
-<<<<<<< HEAD
 router.get("/ontology-data", ontology.getDataFromOntology);
 router.get("/login", dashboardController.pageLogin);
 router.get("/admin", dashboardController.pageAdmin);
-=======
 // router.get("/ontology-data", ontology.getDataFromOntology);
 
 router.get("/tes", tes.getQueryResults);
@@ -37,7 +35,6 @@ router.get("/api/query-by-merek", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
->>>>>>> efab6c5d83d7f6a593db865cae975e946e639b95
 
 router.get("/api/allData", async (req, res) => {
   try {

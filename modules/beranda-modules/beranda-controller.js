@@ -196,7 +196,6 @@ const pageBeranda = async (req, res) => {
     });
   }
 };
-<<<<<<< HEAD
 const pageLogin = async (req, res) => {
   try {
     return res.render("login", {
@@ -234,7 +233,3 @@ module.exports = {
   pageLogin,
   pageAdmin,
 };
-=======
-
-module.exports = { pageBeranda, getDataFromOntology };
->>>>>>> efab6c5d83d7f6a593db865cae975e946e639b95
