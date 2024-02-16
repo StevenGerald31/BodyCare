@@ -32,7 +32,7 @@ router.get("/api/merek", async (req, res) => {
 router.get("/api/query-by-merek", async (req, res) => {
   try {
     const selectedMerek = req.query.merek;
-    const results = await controller.executeQueryByMerek(selectedMerek);
+    const results = await dashboardController.executeQueryByMerek(selectedMerek);
     res.json(results);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -47,5 +47,20 @@ router.get("/api/allData", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+router.get("/pencarian", async (req, res) => {
+  try {
+    const queryFilters = req.query.queryFilters;
+
+    const pencarian = await dashboardController.pencarian(queryFilters);
+    res.json(pencarian)
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
+
+router.get("/dataTransaksi", dashboardController.dataTransaksi)
+router.get("/dataAlgoritma", dashboardController.dataAlgoritma)
+router.post("/dataHasilAlgoritma", dashboardController.hasilAlgoritma)
 
 module.exports = router;

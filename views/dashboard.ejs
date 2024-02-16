@@ -63,7 +63,7 @@
       <div class="penjelajahan container">
         <div class="section-title">
           <h2>Fitur Penjelajahan</h2>
-          <p style="width: 1200px">
+          <p style="max-width: 1200px">
             "Temukan kecantikan alami kulitmu dengan fitur penjelajahan terbaru
             dalam aplikasi skincare kami! Dengan navigasi yang intuitif,
             eksplorasi produk-produk terbaik untuk perawatan kulitmu menjadi
@@ -82,7 +82,7 @@
             <!-- <h3>Data Analyst &amp; Web Developer</h3> -->
             <div class="row pt-3">
               <div class="col-sm-2 d-flex align-item-center">
-                <h2>Pilih Merk :</h2>
+                <h2>Pilih Merek</h2>
               </div>
               <div class="col-md-10">
                 <div class="dropdown">
@@ -93,22 +93,15 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <h6>Pilihan Merk</h6>
+                    <h6 id="selectedMerek">Pilihan Merek</h6>
                     <img src="/images/dropdown.png" alt="" />
                   </button>
                   <ul
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                     style="width: 500px"
-                  >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
+                    id="merekListDropdown"
+                  ></ul>
                 </div>
               </div>
             </div>
@@ -126,110 +119,59 @@
                     <h2>Hasil Penjelajahan</h2>
                   </div>
                 </div>
-                <div class="row d-flex justify-content-center">
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div
+                  class="row d-flex justify-content-center"
+                  id="card-container"
+                >
+                  <h3 class="text-center text-black fw-bold">Silahkan Pilih Merek Terlebih Dahulu</h3>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- pop up detail -->
+      <div
+        class="modal fade"
+        data-backdrop="false"
+        id="modal-skincare"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-black" id=""></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12 p-1 d-flex justify-content-center">
+                  <img
+                    src="/images/2744266.jpg"
+                    alt="gambar hewan"
+                    class="gambar-detail"
+                    width="70%"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <h5
+                  class="card-title text-black text-center fw-bold"
+                  id="merek"
+                ></h5>
+                <h6 class="text-center fw-bold" style="color: red" id="harga"></h6>
+                <p class="card-text" id="manfaat" style="color: black"></p>
+                <h6 class="text-black" id="usia"></h6>
+                <p class="card-text" id="deskripsi" style="color: black"></p>
+                <p class="card-text" id="masalah" style="color: black"></p>
               </div>
             </div>
           </div>
@@ -261,19 +203,15 @@
         </div>
 
         <div class="row">
-          <!-- <div class="col-lg-4" data-aos="fade-right">
-            <img src="assets/img/me.png" class="img-fluid" alt="" />
-          </div> -->
           <div class="col-lg-12 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <!-- <h3>Data Analyst &amp; Web Developer</h3> -->
             <div class="row pt-3">
               <div
                 class="col-sm-3 d-flex align-item-center"
                 style="width: 280px"
               >
-                <h2>Jenis bodycare :</h2>
+                <h2>Jenis Bodycare :</h2>
               </div>
-              <div class="col-md-3">
+              <div class="pil jenis col-md-3">
                 <div class="dropdown">
                   <button
                     class="btn"
@@ -282,7 +220,7 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <h6>Jenis bodycare</h6>
+                    <h6>Jenis Bodycare</h6>
                     <img src="/images/dropdown.png" alt="" />
                   </button>
                   <ul
@@ -290,12 +228,12 @@
                     aria-labelledby="dropdownMenuButton1"
                     style="width: 300px"
                   >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" value="Body Lotion">Body Lotion</a></li>
                     <li>
-                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" value="Body Scrub">Body Scrub</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item" value="Body Wash">Body Wash</a>
                     </li>
                   </ul>
                 </div>
@@ -306,7 +244,7 @@
               >
                 <h2>Pilih Merek :</h2>
               </div>
-              <div class="col-md-3">
+              <div class="pil merek col-md-3">
                 <div class="dropdown">
                   <button
                     class="btn"
@@ -323,18 +261,33 @@
                     aria-labelledby="dropdownMenuButton1"
                     style="width: 300px"
                   >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" value="Bali Alus" >Bali Alus</a></li>
                     <li>
-                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" value="Bali Ratih">Bali Ratih</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item" value="Erha">Erha</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Grace and Glow">Grace and Glow</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Herborist">Herborist</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Marina">Marina</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Scarlett Whitening">Scarlett Whitening</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Sensatia Botanicals">Sensatia Botanicals</a>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div class="row pt-3">
+            <div class="pil masalah row pt-3">
               <div
                 class="col-sm-3 d-flex align-item-center"
                 style="width: 280px"
@@ -358,12 +311,27 @@
                     aria-labelledby="dropdownMenuButton1"
                     style="width: 300px"
                   >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" value="Kulit Berjerawat">Kulit Berjerawat</a></li>
                     <li>
-                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" value="Kulit Berminyak">Kulit Berminyak</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item" value="Kulit Gelap">Kulit Gelap</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Kulit Kasar">Kulit Kasar</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Kulit Kering">Kulit Kering</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Kulit Kusam">Kulit Kusam</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Kulit Sensitif">Kulit Sensitif</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="Warna Kulit Tidak Merata">Warna Kulit Tidak Merata</a>
                     </li>
                   </ul>
                 </div>
@@ -372,44 +340,9 @@
                 class="col-sm-3 d-flex align-item-center"
                 style="width: 250px"
               >
-                <h2>Pilih Usia :</h2>
-              </div>
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button
-                    class="btn"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <h6>Pilih Usia</h6>
-                    <img src="/images/dropdown.png" alt="" />
-                  </button>
-                  <ul
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                    style="width: 300px"
-                  >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="row pt-3">
-              <div
-                class="col-sm-3 d-flex align-item-center"
-                style="width: 280px"
-              >
                 <h2>Pilih Harga :</h2>
               </div>
-              <div class="col-md-3">
+              <div class="pil harga col-md-3">
                 <div class="dropdown">
                   <button
                     class="btn"
@@ -426,17 +359,34 @@
                     aria-labelledby="dropdownMenuButton1"
                     style="width: 300px"
                   >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" value="1000-50000">Rp1.000 - Rp50.0000</a></li>
                     <li>
-                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" value="50000-100000">Rp50.000 - Rp100.000</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item" value="100000-150000">Rp100.000 - Rp150.000</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="150000-200000">Rp150.000 - Rp200.000</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" value="200000-250000">Rp200000 - Rp250.000</a>
                     </li>
                   </ul>
                 </div>
               </div>
+              <div class="d-flex">
+                <button
+                type="button "
+                class="btn btn-primary submit-button d-flex justify-content-end m-2"
+              >
+                Cari
+              </button>
+              <button class="btn btn-danger  submit-button d-flex m-2 hapus"> hapus pilihan</button>
+              </div>
             </div>
+            
+
             <div class="row pt-4">
               <div
                 class="card card-content"
@@ -451,109 +401,63 @@
                     <h2>Hasil Pencarian</h2>
                   </div>
                 </div>
-                <div class="row d-flex justify-content-center">
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="row d-flex justify-content-center" id="card-pencarian">
+                  <h3 class="text-center text-black fw-bold">Silahkan Masukkan Kategori Terlebih Dahulu</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- pop up detail -->
+      <div
+        class="modal fade"
+        data-backdrop="false"
+        id="modal-pencarian"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-black" id=""></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12 p-1 d-flex justify-content-center">
+                  <img
+                    src="/images/2744266.jpg"
+                    alt="gambar hewan"
+                    class="gambar-detail"
+                    width="70%"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <h5
+                  class="card-title text-black text-center fw-bold"
+                  id="merekPencarian"
+                ></h5>
+                <h6 class="text-center fw-bold" style="color: red" id="hargaPencarian"></h6>
+                <p class="card-text" id="manfaatPencarian" style="color: black"></p>
+                <h6 class="text-black" id="usiaPencarian"></h6>
+                <p class="card-text" id="deskripsiPencarian" style="color: black"></p>
+                <p class="card-text" id="masalahPencarian" style="color: black"></p>
+              </div>
+              <div
+                class="row d-flex align-items-center justify-content-center"
+              >
+                <div class="col">
+                  <a class="btn btn-success algoritmaRun"
+                    >Lihat Rekomendasi Lainnya</a
+                  >
                 </div>
               </div>
             </div>
@@ -591,142 +495,6 @@
           </div> -->
           <div class="col-lg-12 pt-4 pt-lg-0 content" data-aos="fade-left">
             <!-- <h3>Data Analyst &amp; Web Developer</h3> -->
-            <div class="row pt-3">
-              <div
-                class="col-sm-3 d-flex align-item-center"
-                style="width: 280px"
-              >
-                <h2>Jenis bodycare :</h2>
-              </div>
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button
-                    class="btn"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <h6>Jenis bodycare</h6>
-                    <img src="/images/dropdown.png" alt="" />
-                  </button>
-                  <ul
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                    style="width: 300px"
-                  >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div
-                class="col-sm-3 d-flex align-item-center"
-                style="width: 250px"
-              >
-                <h2>Masalah kulit :</h2>
-              </div>
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button
-                    class="btn"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <h6>Masalah kulit</h6>
-                    <img src="/images/dropdown.png" alt="" />
-                  </button>
-                  <ul
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                    style="width: 300px"
-                  >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="row pt-3">
-              <div
-                class="col-sm-3 d-flex align-item-center"
-                style="width: 280px"
-              >
-                <h2>Pilih Usia :</h2>
-              </div>
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button
-                    class="btn"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <h6>Pilih Usia</h6>
-                    <img src="/images/dropdown.png" alt="" />
-                  </button>
-                  <ul
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                    style="width: 300px"
-                  >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div
-                class="col-sm-3 d-flex align-item-center"
-                style="width: 250px"
-              >
-                <h2>Pilih Harga :</h2>
-              </div>
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button
-                    class="btn"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <h6>Pilih Harga</h6>
-                    <img src="/images/dropdown.png" alt="" />
-                  </button>
-                  <ul
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                    style="width: 300px"
-                  >
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
             <div class="row pt-4">
               <div
                 class="card card-content"
@@ -741,110 +509,54 @@
                     <h2>Hasil Rekomendasi</h2>
                   </div>
                 </div>
-                <div class="row d-flex justify-content-center">
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card pilihan">
-                    <img src="/images/2744266.jpg" class="card-img" />
-                    <div class="card-body">
-                      <h5 class="card-title">Cream Lotion Bangkuang</h5>
-                      <h6>Citra</h6>
-                      <h6 class="harga">Rp.59.000,00</h6>
-                      <p class="card-text" style="color: black">
-                        Citra Bengkuang Radiance Serum adalah solusi
-                        revolusioner untuk kulit yang cerah dan sehat. Dirancang
-                        khusus dengan formula yang menggabungkan keajaiban
-                        bengkuang dan bahan-bahan aktif lainnya, serum ini
-                        memberikan nutrisi mendalam dan membantu mengembalikan
-                        kecerahan alami kulit.
-                      </p>
-                      <div class="row d-flex align-items-center">
-                        <div class="col">
-                          <a href="#detail" class="btn btn-warning"
-                            >Lihat Detail</a
-                          >
-                        </div>
-                        <div
-                          class="col d-flex justify-content-end fw-bold"
-                          style="margin-right: 3%"
-                        >
-                          <img
-                            src="/images/icons8-star-48.png"
-                            style="width: 20%"
-                            class="d-inline-block align-item-center me-1"
-                          />
-                          4.8
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="row d-flex justify-content-center" id="card-rekomendasi">
+                  <h3 class="text-center text-black fw-bold">Silahkan Lakukan Pencarian Terlebih Dahulu</h3>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        data-backdrop="false"
+        id="modal-rekomendasi"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-black" id=""></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12 p-1 d-flex justify-content-center">
+                  <img
+                    src="/images/2744266.jpg"
+                    alt="gambar hewan"
+                    class="gambar-detail"
+                    width="70%"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <h5
+                  class="card-title text-black text-center fw-bold"
+                  id="merekRekomendasi"
+                ></h5>
+                <h6 class="text-center fw-bold" style="color: red" id="hargaRekomendasi"></h6>
+                <p class="card-text" id="manfaatRekomendasi" style="color: black"></p>
+                <h6 class="text-black" id="usiaRekomendasi"></h6>
+                <p class="card-text" id="deskripsiRekomendasi" style="color: black"></p>
+                <p class="card-text" id="masalahRekomendasi" style="color: black"></p>
               </div>
             </div>
           </div>
@@ -998,6 +710,434 @@
           }
         });
       })();
+
+      let merekPilih;
+      // script untuk databse
+      $(document).ready(function () {
+        fetch(`http://localhost:3000/web/api/merek`)
+          .then((respons) => respons.json())
+          .then((merekList) => {
+            // masukan ke dalam dropdown
+            const dropdown = document.querySelector(".dropdown-menu");
+            
+
+            merekList.forEach((merek) => {
+
+              const merekItem = document.createElement("li");
+              merekItem.innerHTML = `<a class="dropdown-item" href="#">${merek}</a>`;
+              // tambahkan event listener
+              merekItem.addEventListener("click", () => {
+                merekPilih = merek.replace(/ /g, "_"); // Add this line
+                selectMerek(merekPilih);
+              });
+              dropdown.appendChild(merekItem);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching merek list:", error);
+          });
+      });
+
+      // jika user memilih merek dari drop down
+      function selectMerek(merek) {
+        // Hapus semua card yang ada
+        const cardContainer = document.getElementById("card-container");
+        while (cardContainer.firstChild) {
+          cardContainer.removeChild(cardContainer.firstChild);
+        }
+
+        fetch(`http://localhost:3000/web/api/query-by-merek?merek=${merekPilih}`)
+          .then((respons) => respons.json())
+          .then((bodycareList) => {
+            console.log("List", bodycareList[0])
+            bodycareList.forEach((bodycare, index) => {
+              const card = document.createElement("div");
+              card.className = "card pilihan";
+
+              const parseharga = parseInt(bodycare.Harga.value);
+              const formattedHarga = parseharga.toLocaleString("id-ID");
+
+              card.innerHTML = `
+                <img src="/images/2744266.jpg" class="card-img" />
+                <div class="card-body">
+                  <h3 class="merek-card text-center" >${bodycare.Merek.value}</h3>
+                  <h5 class="card-title">${bodycare.namaProduk.value}</h5>
+                  <h6>${bodycare.Usia.value}</h6>
+                  <h6 class="harga">Rp${formattedHarga}</h6>
+                  <p class="card-text" style="color: black"></p>
+                  <div class="row d-flex align-items-center">
+                    <div class="col">
+                      <a class="btn btn-warning detail-button" data-bs-target="#modal-skincare" data-bs-toggle="modal">Lihat Detail</a>
+                    </div>
+                    <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
+                      <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
+                      4.8
+                    </div>
+                  </div>
+                </div>
+              `;
+
+              const button = card.querySelector(".detail-button");
+              $("#modal-skincare #merek").html(`${bodycare.namaProduk.value}`);
+              $("#modal-skincare #usia").html(`${bodycare.Usia.value}`);
+              $("#modal-skincare #harga").html(`Rp${formattedHarga}`);
+              $("#modal-skincare #deskripsi").html(`<strong>Deskripsi :</strong> ${bodycare.Deskripsi.value}`);
+              $("#modal-skincare #manfaat").html(`${bodycare.Manfaat.value}`);
+              $("#modal-skincare #masalah").html(
+                `<strong>Masalah Kulit :</strong> ${bodycare.Masalah_Kulit.value}`
+              );
+
+              cardContainer.appendChild(card);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching bodycare list:", error);
+          });
+      }
+
+    //    <!-- ---------------------------------- -->
+    //    <!--          Pencarian Start           -->
+    //    <!-- ---------------------------------- -->
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const dropdowns = document.querySelectorAll(".dropdown");
+      const hapusButton = document.querySelector(".hapus");
+
+      var queryFilters = "";
+
+      dropdowns.forEach((dropdown) => {
+        const button = dropdown.querySelector("button");
+        const items = dropdown.querySelectorAll(".dropdown-item");
+
+        items.forEach((item) => {
+          item.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Hapus class 'active' dari item yang sebelumnya aktif
+            const previousActiveItem = dropdown.querySelector(".dropdown-item.active");
+            if (previousActiveItem) {
+              previousActiveItem.classList.remove("active");
+            }
+
+            // Tambahkan class 'active' ke item yang dipilih dan ubah teks tombol
+            this.classList.add("active");
+            button.querySelector("h6").textContent = this.textContent;
+          });
+        });
+      });
+
+      // Tambahkan event listener ke tombol hapus
+      hapusButton.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // Hapus class 'active' dari semua item dropdown
+        dropdowns.forEach((dropdown) => {
+          const activeItem = dropdown.querySelector(".dropdown-item.active");
+          if (activeItem) {
+            activeItem.classList.remove("active");
+          }
+
+          // Set ulang teks tombol dropdown
+          const button = dropdown.querySelector("button");
+          button.querySelector("h6").textContent = ""
+        });
+
+        queryFilters = "";
+
+      });
+    });
+
+    let namaProduk = null
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const submitButton = document.querySelector(".submit-button");
+
+      submitButton.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // ambil nilai dari dropdown
+        var selectedJenis = document.querySelector(".pil.jenis .dropdown-item.active")?.getAttribute("value");
+        var selectedMerek = document.querySelector(".pil.merek .dropdown-item.active")?.getAttribute("value");
+        var selectedMasalah = document.querySelector(".pil.masalah .dropdown-item.active")?.getAttribute("value");
+        var selectedHarga = document.querySelector(".pil.harga .dropdown-item.active")?.getAttribute("value");
+
+        // buat string query berdasarkan apa yang dipilih pengguna
+        var queryFilters = "";
+        if (selectedJenis) {
+          const formattedJenis = selectedJenis.replace(/ /g, "_");
+          queryFilters += `FILTER(?Jenis_Bodycare = :${formattedJenis})`;
+        }
+        if (selectedMerek) {
+          const formattedMerek = selectedMerek.replace(/ /g, "_");
+          queryFilters += `FILTER(?Merek_Bodycare = :${formattedMerek})`;
+        }
+        if (selectedMasalah) {
+          const formattedMasalah = selectedMasalah.replace(/ /g, "_");
+          queryFilters += `FILTER(?Masalah_Kulit = :${formattedMasalah})`;
+        }
+        if (selectedHarga) {
+          const formattedHarga = selectedHarga.replace(/ /g, "_");
+          queryFilters += `FILTER(?Harga = :${formattedHarga})`;
+        }
+
+        console.log("Jenis : ", selectedJenis);
+        console.log("Merek : ", selectedMerek);
+        console.log("Masalah : ", selectedMasalah);
+        console.log("Harga : ", selectedHarga);
+
+        
+        fetch(
+          `http://localhost:3000/web/pencarian?queryFilters=${encodeURIComponent(queryFilters)}`,
+          {
+            method: "GET",
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Data: ", typeof data)
+
+            const cardsContainer = document.getElementById("card-pencarian");
+              cardsContainer.innerHTML = ""
+
+            // buat kedalam card
+            data.forEach((bodycare) => {
+              console.log("Bodycare: ", bodycare)
+
+              const card = document.createElement("div");
+              card.className = "card pilihan";
+
+              const parseharga = parseInt(bodycare.ProdukHarga.value);
+              const formattedHarga = parseharga.toLocaleString("id-ID");
+
+
+              card.innerHTML = `
+                <img src="/images/2744266.jpg" class="card-img" />
+                <div class="card-body">
+                  <h3 class="merek-card text-center" >${bodycare.MerekBodycare.value}</h3>
+                  <h5 class="card-title">${bodycare.NamaProduk.value}</h5>
+                  <h6>${bodycare.Usia.value}</h6>
+                  <h6 class="harga">Rp${formattedHarga}</h6>
+                  <p class="card-text" style="color: black"></p>
+                  <div class="row d-flex align-items-center">
+                    <div class="col">
+                      <a class="btn btn-warning detail-button" data-bs-target="#modal-pencarian" data-bs-toggle="modal">Lihat Detail</a>
+                    </div>
+                    <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
+                      <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
+                      4.8
+                    </div>
+                  </div>
+                </div>
+              `;
+
+              const button = card.querySelector(".detail-button");
+              button.addEventListener("click", () => {
+                $("#modal-pencarian #merekPencarian").html(`${bodycare.NamaProduk.value}`);
+                $("#modal-pencarian #usiaPencarian").html(`${bodycare.Usia.value}`);
+                $("#modal-pencarian #hargaPencarian").html(`Rp${formattedHarga}`);
+                $("#modal-pencarian #deskripsiPencarian").html(`<strong>Deskripsi :</strong> ${bodycare.Deskripsi.value}`);
+                $("#modal-pencarian #manfaatPencarian").html(`${bodycare.Manfaat.value}`);
+                $("#modal-pencarian #masalahPencarian").html(`<strong>Masalah Kulit :</strong> ${bodycare.MasalahKulit.value}`);
+
+                namaProduk = bodycare.NamaProduk.value
+              });
+
+              // Tambahkan kartu ke container
+              cardsContainer.appendChild(card);
+            })
+            
+          })
+      })
+
+      // Kirim nama Produk Ke server
+      const buttonAlgoritma = document.querySelector(".algoritmaRun");
+      const rekomendasiSection = document.querySelector('#rekomendasi');
+      buttonAlgoritma.addEventListener("click", () => {
+        if (namaProduk) {
+          console.log("Produk :", namaProduk)
+
+          fetch(`http://localhost:3000/web/dataTransaksi?namaProduk=${encodeURIComponent(namaProduk)}`)
+            .then(response => response.json())
+            .then(dataTrasaksi => {
+
+              console.log("Data Rekomendasi", dataTrasaksi)
+              const productIds = dataTrasaksi.map(item => item.id_produk);
+              
+
+              // Mendapatkan array distinct
+              const distinctProductIds = productIds.filter((value, index, self) => self.indexOf(value) === index);
+
+              // buat hasilnya dalam bentuk string
+              const id_target = distinctProductIds.join(",");
+              console.log("Distinct ID Product", id_target)
+
+              // algoritma collaborative Filtering Start
+              fetch(`http://localhost:3000/web/dataAlgoritma`)
+                .then(response => response.json())
+                .then(dataAlgoritma => {
+                  const formattedData = dataAlgoritma.map((item) => ({
+                    user_id: item.id_pelanggan,
+                    produk_id: item.id_produk,
+                    rating: item.rating,
+                  }));
+
+                  // Fungsi untuk menghitung kesamaan kosinus antara dua vektor
+                  function cosineSimilarity(vectorA, vectorB) {
+                    const dotProduct = vectorA.reduce(
+                      (acc, val, i) => acc + val * vectorB[i],
+                      0
+                    );
+                    const magnitudeA = Math.sqrt(
+                      vectorA.reduce((acc, val) => acc + val * val, 0)
+                    );
+                    const magnitudeB = Math.sqrt(
+                      vectorB.reduce((acc, val) => acc + val * val, 0)
+                    );
+
+                    if (magnitudeA === 0 || magnitudeB === 0) {
+                      return 0; // Handle division by zero
+                    }
+
+                    return dotProduct / (magnitudeA * magnitudeB);
+                  }
+
+                  // fungsi membuat matriks item
+                  function createItemMatrix(formattedData) {
+                    const itemMatrix = {};
+
+                    for (const entry of formattedData) {
+                      if (!itemMatrix[entry.produk_id]) {
+                        itemMatrix[entry.produk_id] = {};
+                      }
+                      itemMatrix[entry.produk_id][entry.user_id] = entry.rating;
+                    }
+
+                    return itemMatrix;
+                  }
+
+                  function getItemRecommendations(itemMatrix, targetProduk, targetPelanggan) {
+                    if (!itemMatrix[targetProduk]) {
+                      throw new Error(
+                        `Produk with ID ${targetProduk} not found in itemMatrix`
+                      );
+                    }
+
+                    const targetVector = Object.values(itemMatrix[targetProduk]);
+
+                    const recommendations = Object.keys(itemMatrix)
+                      .filter((produkId) => produkId !== targetProduk)
+                      .map((produkId) => ({
+                        produkId,
+                        similarity: cosineSimilarity(
+                          targetVector,
+                          Object.values(itemMatrix[produkId])
+                        ),
+                      }))
+                      .sort((a, b) => b.similarity - a.similarity); // Urutkan berdasarkan similarity tertinggi
+
+                    return recommendations;
+                  }
+
+                  // jalankan algoritma
+                  const itemMatrix = createItemMatrix(formattedData);
+                  const targetProduk = id_target; // Sesuaikan dengan ID yang sesuai pada data
+                  const targetPelanggan = 2; // Sesuaikan dengan ID user yang sesuai
+                  const recommendations = getItemRecommendations(itemMatrix, targetProduk, targetPelanggan);
+
+                  // ambil 10 produk paling atas aja sebagai rekomendasi
+                  const hasilCollaborative = recommendations
+                    .map((recommendation) => recommendation.produkId)
+                    .slice(0, 10);
+                  const hasilCollaborativeSemua = recommendations
+                    .map((recommendation) => recommendation.produkId);
+
+                  console.log("Hasil Collaborative Filtering Keseluruhan: ", hasilCollaborative)
+
+                  // tampilkan data hasil rekomendasi
+                  fetch("http://localhost:3000/web/dataHasilAlgoritma",{
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      produkHasilId: hasilCollaborative,
+                    }),
+                  })
+                    .then(response => response.json())
+                    .then(produkData => {
+                      console.log("HAsil: ", produkData)
+
+                      const cardsContainer = document.getElementById("card-rekomendasi");
+                      cardsContainer.innerHTML = ""
+
+                      // buat kedalam card
+                      produkData.forEach((bodycare) => {
+                        console.log("Bodycare: ", bodycare)
+
+                        const card = document.createElement("div");
+                        card.className = "card pilihan";
+
+                        const rating = bodycare.rating;
+                        const formattedRating = parseFloat(rating).toFixed(1);
+
+                        card.innerHTML = `
+                          <img src="/images/2744266.jpg" class="card-img" />
+                          <div class="card-body">
+                            <h3 class="merek-card text-center" >${bodycare.merk}</h3>
+                            <h5 class="card-title">${bodycare.nama_produk}</h5>
+                            <h6>${bodycare.usia}</h6>
+                            <h6 class="harga">Rp${bodycare.harga}</h6>
+                            <p class="card-text" style="color: black"></p>
+                            <div class="row d-flex align-items-center">
+                              <div class="col">
+                                <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
+                              </div>
+                              <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
+                                <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
+                                <h5>${formattedRating}</h5>
+                              </div>
+                            </div>
+                          </div>
+                        `;
+
+                        const button = card.querySelector(".detail-button");
+                        button.addEventListener("click", () => {
+                          $("#modal-rekomendasi #merekRekomendasi").html(`${bodycare.nama_produk}`);
+                          $("#modal-rekomendasi #usiaRekomendasi").html(`${bodycare.usia}`);
+                          $("#modal-rekomendasi #hargaRekomendasi").html(`Rp${bodycare.harga}`);
+                          $("#modal-rekomendasi #deskripsiRekomendasi").html(`<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`);
+                          $("#modal-rekomendasi #manfaatRekomendasi").html(`${bodycare.manfaat_produk}`);
+                          $("#modal-rekomendasi #masalahRekomendasi").html(`<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`);
+
+                          
+                        });
+
+                        // Tambahkan kartu ke container
+                        cardsContainer.appendChild(card);
+
+                        $('#modal-pencarian').modal('hide');
+                        window.location.href = '/web/dashboard#rekomendasi';
+
+                        // if (bodycare === produkData[produkData.length - 1]) {
+                        //   $('#modal-pencarian').modal('hide');
+                        //   setTimeout(() => {
+                        //     $('html, body').animate({
+                        //       scrollTop: $("#rekomendasi").offset().top
+                        //     }, 2000);
+                        //   }, 500);
+                        // }
+                      })
+                    } )
+
+                })
+                .catch((error) => {
+                  console.error("Error", error);
+                });
+            });
+        }
+      });
+    })
+
+    
+
     </script>
   </body>
 </html>
