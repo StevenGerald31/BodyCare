@@ -51,7 +51,7 @@ const pageAdmin = async (req, res) => {
 };
 
 // sparql query section 
-const endpointUrl = "http://localhost:3030/tes/sparql";
+const endpointUrl = "http://localhost:3030/ontology-tugas-akhir/sparql";
 
 const executeQuery = async (query) => {
   const client = new SparqlClient({ endpointUrl });

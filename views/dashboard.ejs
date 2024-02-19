@@ -455,7 +455,7 @@
                 class="row d-flex align-items-center justify-content-center"
               >
                 <div class="col">
-                  <a class="btn btn-success algoritmaRun"
+                  <a href="#rekomendasi" class="btn btn-success algoritmaRun"
                     >Lihat Rekomendasi Lainnya</a
                   >
                 </div>
@@ -778,14 +778,16 @@
               `;
 
               const button = card.querySelector(".detail-button");
-              $("#modal-skincare #merek").html(`${bodycare.namaProduk.value}`);
-              $("#modal-skincare #usia").html(`${bodycare.Usia.value}`);
-              $("#modal-skincare #harga").html(`Rp${formattedHarga}`);
-              $("#modal-skincare #deskripsi").html(`<strong>Deskripsi :</strong> ${bodycare.Deskripsi.value}`);
-              $("#modal-skincare #manfaat").html(`${bodycare.Manfaat.value}`);
-              $("#modal-skincare #masalah").html(
-                `<strong>Masalah Kulit :</strong> ${bodycare.Masalah_Kulit.value}`
-              );
+              button.addEventListener("click", () => {
+                $("#modal-skincare #merek").html(`${bodycare.namaProduk.value}`);
+                $("#modal-skincare #usia").html(`${bodycare.Usia.value}`);
+                $("#modal-skincare #harga").html(`Rp${formattedHarga}`);
+                $("#modal-skincare #deskripsi").html(`<strong>Deskripsi :</strong> ${bodycare.Deskripsi.value}`);
+                $("#modal-skincare #manfaat").html(`${bodycare.Manfaat.value}`);
+                $("#modal-skincare #masalah").html(
+                  `<strong>Masalah Kulit :</strong> ${bodycare.Masalah_Kulit.value}`
+                );
+              })
 
               cardContainer.appendChild(card);
             });
@@ -897,12 +899,19 @@
             const cardsContainer = document.getElementById("card-pencarian");
               cardsContainer.innerHTML = ""
 
+              // Jika tidak ada data, tampilkan pesan
+            if (data.length === 0) {
+              cardsContainer.innerHTML = '<h3 class="text-center text-black fw-bold">Tidak terdapat produk sesuai kategori yang dipilih</h3>';
+              return;
+            }
+
             // buat kedalam card
             data.forEach((bodycare) => {
               console.log("Bodycare: ", bodycare)
 
               const card = document.createElement("div");
               card.className = "card pilihan";
+
 
               const parseharga = parseInt(bodycare.ProdukHarga.value);
               const formattedHarga = parseharga.toLocaleString("id-ID");
@@ -978,6 +987,8 @@
                     produk_id: item.id_produk,
                     rating: item.rating,
                   }));
+
+                  // Algoritma Colaborative Filtering Start
 
                   // Fungsi untuk menghitung kesamaan kosinus antara dua vektor
                   function cosineSimilarity(vectorA, vectorB) {
@@ -1114,7 +1125,7 @@
                         cardsContainer.appendChild(card);
 
                         $('#modal-pencarian').modal('hide');
-                        window.location.href = '/web/dashboard#rekomendasi';
+                       
 
                         // if (bodycare === produkData[produkData.length - 1]) {
                         //   $('#modal-pencarian').modal('hide');
