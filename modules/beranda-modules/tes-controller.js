@@ -1,7 +1,7 @@
 const SparqlClient = require("sparql-http-client");
 const getBaseUrl = require("../../utils/getBaseUrl");
 
-const endpointUrl = "http://localhost:3030/tes/sparql";
+const endpointUrl = "http://localhost:3030/ontology-tugas-akhir/sparql";
 
 const executeQuery = async () => {
   const query = `
