@@ -32,24 +32,54 @@ const executeQuery = async (query) => {
 };
 
 const executeQueryByMerek = async (selectedMerek) => {
-  const query = `
+  try {
+    const query = `
           PREFIX tes: <http://www.semanticweb.org/gusve/ontologies/2023/10/untitled-ontology-40#>
-    
-          SELECT ?Usia ?Nama_Produk ?Merek_Bodycare ?Harga ?Manfaat  (REPLACE(str(SUBSTR(str(?Masalah_Kulit), STRLEN(str(tes:)) + 1)), "_", " ") as ?Masalah)
+
+          SELECT ?Usia ?Harga ?Manfaat  (REPLACE(str(SUBSTR(str(?Masalah_Kulit), STRLEN(str(tes:)) + 1)), "_", " ") as ?Masalah)
           WHERE {
             ?dsn tes:Merek_Bodycare "${selectedMerek}" ;
                  tes:Harga ?Harga ;
-                 tes:hasProductName ?Nama_Produk ;
                  tes:Usia ?Usia ;
-                 tes:Manfaat ?Manfaat;
-                 tes:hasBodycareType ?Jenis_Bodycare;
                  tes:hasSkinIssues ?Masalah_Kulit;
+                 tes:Manfaat ?Manfaat
+
           }
       `;
 
-  const results = await executeQuery(query);
-  return results;
+    const results = await executeQuery(query);
+    return results;
+  } catch (error) {
+    throw error;
+  }
 };
+
+// const executeQueryByMerek = async (selectedMerek) => {
+//   try {
+//     const query = `
+//     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+//     PREFIX tes: <http://www.semanticweb.org/gusve/ontologies/2023/10/untitled-ontology-40#>
+
+//     SELECT ?Merek_Bodycare ?Masalah_Kulit ?Jenis_Bodycare ?Nama_Produk ?Usia ?Harga
+//     WHERE {
+//       ?Merek_Bodycare rdf:type tes:Merek_Bodycare.
+//       ?Merek_Bodycare tes:hasProductName ?Nama_Produk .
+//       ?Merek_Bodycare tes:hasAge ?Usia .
+//       ?Nama_Produk tes:hasBodycareType ?Jenis_Bodycare .
+//       ?Nama_Produk tes:hasPrice ?Harga .
+//       ?Nama_Produk tes:hasSkinIssues ?Masalah_Kulit .
+
+//   FILTER(?Merek_Bodycare = tes:${selectedMerek})
+
+//     }
+//       `;
+
+//     const results = await executeQuery(query);
+//     return results;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 // Perbaikan pada fungsi getMerekList di controller
 const getMerekList = async () => {

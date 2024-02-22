@@ -45,7 +45,7 @@ a:hover {
   height: 100vh;
   display: flex;
   align-items: center;
-  z-index: 997;
+  z-index: 5;
   overflow-y: auto;
 }
 
@@ -285,7 +285,7 @@ a:hover {
   bottom: 0;
   background: rgba(0, 0, 0, 0.9);
   transition: 0.3s;
-  z-index: 999;
+  z-index: 5;
   margin-top: 0;
 }
 
@@ -548,4 +548,8 @@ section .container {
 
 .modal-backdrop {
   z-index: -1;
+}
+
+.modal {
+  z-index: 999;
 }
