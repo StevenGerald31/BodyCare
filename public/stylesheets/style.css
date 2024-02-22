@@ -553,3 +553,7 @@ section .container {
 .modal {
   z-index: 999;
 }
+
+.modal-body {
+  z-index: 999;
+}

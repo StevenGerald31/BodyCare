@@ -64,13 +64,9 @@
         <div class="section-title">
           <h2>Fitur Penjelajahan</h2>
           <p style="max-width: 1200px">
-            "Temukan kecantikan alami kulitmu dengan fitur penjelajahan terbaru
-            dalam aplikasi skincare kami! Dengan navigasi yang intuitif,
-            eksplorasi produk-produk terbaik untuk perawatan kulitmu menjadi
-            lebih menyenangkan. Dari serum hingga masker, mari jelajahi dunia
-            perawatan kulit yang penuh keajaiban dengan aplikasi kami. Dapatkan
-            kulit sehat dan berseri sekarang dengan bantuan fitur penjelajahan
-            yang inovatif!"
+            "Temukan kecantikan kulit alami mu dengan fitur penjelajahan terbaru dalam website bodycare kami! Dengan navigasi yang intuitif, eksplorasi produk-produk 
+            terbaik untuk perawatan kuitmu menjadi lebih menyenangkan. Dari produk body wash hingga body scrub untuk mendapatkan kulit sehat dan berseri dengan
+            bantuan fitur penjelajahan"
           </p>
         </div>
 
@@ -190,15 +186,9 @@
         <div class="section-title">
           <h2>Pencarian</h2>
           <p>
-            "Temukan keindahan kulitmu dengan fitur pencarian canggih dalam
-            aplikasi perawatan kulit kami! Dengan algoritma pintar, temukan
-            produk skincare yang sempurna sesuai dengan kebutuhan khususmu.
-            Pencarian yang mudah dan akurat memastikan pengalaman perawatan
-            kulit yang personal dan efektif. Dari serum hingga pelembap,
-            jelajahi dunia kecantikan dengan cepat dan temukan solusi yang tepat
-            untuk meraih kulit sehat dan bersinar. Ayo mulai perjalanan
-            kecantikanmu sekarang dengan fitur pencarian terbaik di aplikasi
-            skincare kami!"
+            "Temukan keindahan kulitmu dengan fitur pencarian canggih dalam website perawatan kulit kami! Dengan algoritma yang baik, menemukan produk bodycare
+            yang sesuai dengan kebutuhan kulitmu. Dari body wash hingga body scrub yang dapat membuat kulitmu menjadi sehat dan bersinar. Ayo mulai perjalanan
+            kecantikan kulitmu sekarang dengan fitur pencarian terbaik di website bodycare kami!"
           </p>
         </div>
 
@@ -454,8 +444,8 @@
               <div
                 class="row d-flex align-items-center justify-content-center"
               >
-                <div class="col">
-                  <a href="#rekomendasi" class="btn btn-success algoritmaRun"
+                <div class="col " >
+                  <a class="btn btn-success algoritmaRun" href="#rekomendasi"
                     >Lihat Rekomendasi Lainnya</a
                   >
                 </div>
@@ -477,15 +467,9 @@
         <div class="section-title">
           <h2>Rekomendasi</h2>
           <p>
-            "Temukan keindahan kulitmu dengan fitur pencarian canggih dalam
-            aplikasi perawatan kulit kami! Dengan algoritma pintar, temukan
-            produk skincare yang sempurna sesuai dengan kebutuhan khususmu.
-            Pencarian yang mudah dan akurat memastikan pengalaman perawatan
-            kulit yang personal dan efektif. Dari serum hingga pelembap,
-            jelajahi dunia kecantikan dengan cepat dan temukan solusi yang tepat
-            untuk meraih kulit sehat dan bersinar. Ayo mulai perjalanan
-            kecantikanmu sekarang dengan fitur pencarian terbaik di aplikasi
-            skincare kami!"
+            "Temukan keindahan kulitmu dengan fitur pencarian canggih dalam website perawatan kulit kami! Dengan algoritma yang baik, menemukan produk bodycare
+            yang sesuai dengan kebutuhan kulitmu. Dari body wash hingga body scrub yang dapat membuat kulitmu menjadi sehat dan bersinar. Ayo mulai perjalanan
+            kecantikan kulitmu sekarang dengan fitur pencarian terbaik di website bodycare kami!"
           </p>
         </div>
 
@@ -769,10 +753,7 @@
                     <div class="col">
                       <a class="btn btn-warning detail-button" data-bs-target="#modal-skincare" data-bs-toggle="modal">Lihat Detail</a>
                     </div>
-                    <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
-                      <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
-                      4.8
-                    </div>
+                    
                   </div>
                 </div>
               `;
@@ -929,10 +910,7 @@
                     <div class="col">
                       <a class="btn btn-warning detail-button" data-bs-target="#modal-pencarian" data-bs-toggle="modal">Lihat Detail</a>
                     </div>
-                    <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
-                      <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
-                      4.8
-                    </div>
+                    
                   </div>
                 </div>
               `;
@@ -1053,10 +1031,18 @@
                   const targetPelanggan = 2; // Sesuaikan dengan ID user yang sesuai
                   const recommendations = getItemRecommendations(itemMatrix, targetProduk, targetPelanggan);
 
+                  console.log("Nilai rekomendasi : ", recommendations)
+
                   // ambil 10 produk paling atas aja sebagai rekomendasi
+                  // const hasilCollaborative = recommendations
+                  //   .map((recommendation) => recommendation.produkId)
+                  //   .slice(0, 10);
+
                   const hasilCollaborative = recommendations
-                    .map((recommendation) => recommendation.produkId)
-                    .slice(0, 10);
+                    .sort((a, b) => b.similarity - a.similarity) // Urutkan berdasarkan similarity tertinggi 
+                    .map((recommendation) => recommendation.produkId) // Ambil produkId
+                    .slice(0, 10); // Ambil 10 teratas
+
                   const hasilCollaborativeSemua = recommendations
                     .map((recommendation) => recommendation.produkId);
 
@@ -1076,55 +1062,55 @@
                     .then(produkData => {
                       console.log("HAsil: ", produkData)
 
-                      const cardsContainer = document.getElementById("card-rekomendasi");
-                      cardsContainer.innerHTML = ""
+                      // const cardsContainer = document.getElementById("card-rekomendasi");
+                      // cardsContainer.innerHTML = ""
 
-                      // buat kedalam card
-                      produkData.forEach((bodycare) => {
-                        console.log("Bodycare: ", bodycare)
+                      // // buat kedalam card
+                      // produkData.forEach((bodycare) => {
+                      //   console.log("Bodycare: ", bodycare)
 
-                        const card = document.createElement("div");
-                        card.className = "card pilihan";
+                      //   const card = document.createElement("div");
+                      //   card.className = "card pilihan";
 
-                        const rating = bodycare.rating;
-                        const formattedRating = parseFloat(rating).toFixed(1);
+                      //   const rating = bodycare.rating;
+                      //   const formattedRating = parseFloat(rating).toFixed(1);
 
-                        card.innerHTML = `
-                          <img src="/images/2744266.jpg" class="card-img" />
-                          <div class="card-body">
-                            <h3 class="merek-card text-center" >${bodycare.merk}</h3>
-                            <h5 class="card-title">${bodycare.nama_produk}</h5>
-                            <h6>${bodycare.usia}</h6>
-                            <h6 class="harga">Rp${bodycare.harga}</h6>
-                            <p class="card-text" style="color: black"></p>
-                            <div class="row d-flex align-items-center">
-                              <div class="col">
-                                <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
-                              </div>
-                              <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
-                                <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
-                                <h5>${formattedRating}</h5>
-                              </div>
-                            </div>
-                          </div>
-                        `;
+                      //   card.innerHTML = `
+                      //     <img src="/images/2744266.jpg" class="card-img" />
+                      //     <div class="card-body">
+                      //       <h3 class="merek-card text-center" >${bodycare.merk}</h3>
+                      //       <h5 class="card-title">${bodycare.nama_produk}</h5>
+                      //       <h6>${bodycare.usia}</h6>
+                      //       <h6 class="harga">Rp${bodycare.harga}</h6>
+                      //       <p class="card-text" style="color: black"></p>
+                      //       <div class="row d-flex align-items-center">
+                      //         <div class="col">
+                      //           <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
+                      //         </div>
+                      //         <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
+                      //           <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
+                      //           <h5>${formattedRating}</h5>
+                      //         </div>
+                      //       </div>
+                      //     </div>
+                      //   `;
 
-                        const button = card.querySelector(".detail-button");
-                        button.addEventListener("click", () => {
-                          $("#modal-rekomendasi #merekRekomendasi").html(`${bodycare.nama_produk}`);
-                          $("#modal-rekomendasi #usiaRekomendasi").html(`${bodycare.usia}`);
-                          $("#modal-rekomendasi #hargaRekomendasi").html(`Rp${bodycare.harga}`);
-                          $("#modal-rekomendasi #deskripsiRekomendasi").html(`<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`);
-                          $("#modal-rekomendasi #manfaatRekomendasi").html(`${bodycare.manfaat_produk}`);
-                          $("#modal-rekomendasi #masalahRekomendasi").html(`<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`);
+                      //   const button = card.querySelector(".detail-button");
+                      //   button.addEventListener("click", () => {
+                      //     $("#modal-rekomendasi #merekRekomendasi").html(`${bodycare.nama_produk}`);
+                      //     $("#modal-rekomendasi #usiaRekomendasi").html(`${bodycare.usia}`);
+                      //     $("#modal-rekomendasi #hargaRekomendasi").html(`Rp${bodycare.harga}`);
+                      //     $("#modal-rekomendasi #deskripsiRekomendasi").html(`<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`);
+                      //     $("#modal-rekomendasi #manfaatRekomendasi").html(`${bodycare.manfaat_produk}`);
+                      //     $("#modal-rekomendasi #masalahRekomendasi").html(`<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`);
 
                           
-                        });
+                      //   });
 
-                        // Tambahkan kartu ke container
-                        cardsContainer.appendChild(card);
+                      //   // Tambahkan kartu ke container
+                      //   cardsContainer.appendChild(card);
 
-                        $('#modal-pencarian').modal('hide');
+                      //   $('#modal-pencarian').modal('hide');
                        
 
                         // if (bodycare === produkData[produkData.length - 1]) {
@@ -1135,7 +1121,17 @@
                         //     }, 2000);
                         //   }, 500);
                         // }
-                      })
+
+                        
+                      // })
+                        // simpan data ke lokal storage
+                        $('#modal-pencarian').modal('hide');
+                        localStorage.setItem("hasilCollaborative", JSON.stringify(produkData));
+
+                        setTimeout(() => {
+                          window.location.href = "#rekomendasi";
+                        }, 1000);
+
                     } )
 
                 })
