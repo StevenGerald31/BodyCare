@@ -18,7 +18,7 @@ body::before {
   right: 0;
   top: 0;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
 }
 
 @media (min-width: 1024px) {
@@ -46,6 +46,7 @@ a:hover {
   display: flex;
   align-items: center;
   z-index: 5;
+  /* position: fixed; */
   overflow-y: auto;
 }
 
@@ -547,9 +548,10 @@ section .container {
 }
 
 .modal-backdrop {
-  z-index: -1;
+  z-index: 1;
 }
 
 .modal {
-  z-index: 999;
+  z-index: 15;
+  position: fixed;
 }
