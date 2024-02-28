@@ -446,9 +446,11 @@
               class="row d-flex align-items-center justify-content-center"
             >
               <div class="col">
-                <a href="#rekomendasi" class="btn btn-success algoritmaRun"
+                <nav id="navbar" class="navbar" >
+                  <a href="#rekomendasi" class=" nav-link btn btn-success algoritmaRun" style="background-color: rgb(219, 118, 59);"
                   >Lihat Rekomendasi Lainnya</a
                 >
+                </nav>
               </div>
             </div>
           </div>
@@ -667,32 +669,32 @@
         /**
          * Activate/show sections on load with hash links
          */
-        window.addEventListener("load", () => {
-          if (window.location.hash) {
-            let initial_nav = select(window.location.hash);
+        // window.addEventListener("load", () => {
+        //   if (window.location.hash) {
+        //     let initial_nav = select(window.location.hash);
 
-            if (initial_nav) {
-              let header = select("#header");
-              let navlinks = select("#navbar .nav-link", true);
+        //     if (initial_nav) {
+        //       let header = select("#header");
+        //       let navlinks = select("#navbar .nav-link", true);
 
-              header.classList.add("header-top");
+        //       header.classList.add("header-top");
 
-              navlinks.forEach((item) => {
-                if (item.getAttribute("href") == window.location.hash) {
-                  item.classList.add("active");
-                } else {
-                  item.classList.remove("active");
-                }
-              });
+        //       navlinks.forEach((item) => {
+        //         if (item.getAttribute("href") == window.location.hash) {
+        //           item.classList.add("active");
+        //         } else {
+        //           item.classList.remove("active");
+        //         }
+        //       });
 
-              setTimeout(function () {
-                initial_nav.classList.add("section-show");
-              }, 350);
+        //       setTimeout(function () {
+        //         initial_nav.classList.add("section-show");
+        //       }, 350);
 
-              scrollto(window.location.hash);
-            }
-          }
-        });
+        //       scrollto(window.location.hash);
+        //     }
+        //   }
+        // });
       })();
 
       let merekPilih;
@@ -1062,76 +1064,56 @@
                     .then(produkData => {
                       console.log("HAsil: ", produkData)
 
-                      // const cardsContainer = document.getElementById("card-rekomendasi");
-                      // cardsContainer.innerHTML = ""
+                      const cardsContainer = document.getElementById("card-rekomendasi");
+                      cardsContainer.innerHTML = ""
 
-                      // // buat kedalam card
-                      // produkData.forEach((bodycare) => {
-                      //   console.log("Bodycare: ", bodycare)
+                      // buat kedalam card
+                      produkData.forEach((bodycare) => {
+                        console.log("Bodycare: ", bodycare)
 
-                      //   const card = document.createElement("div");
-                      //   card.className = "card pilihan";
+                        const card = document.createElement("div");
+                        card.className = "card pilihan";
 
-                      //   const rating = bodycare.rating;
-                      //   const formattedRating = parseFloat(rating).toFixed(1);
+                        const rating = bodycare.rating;
+                        const formattedRating = parseFloat(rating).toFixed(1);
 
-                      //   card.innerHTML = `
-                      //     <img src="/images/2744266.jpg" class="card-img" />
-                      //     <div class="card-body">
-                      //       <h3 class="merek-card text-center" >${bodycare.merk}</h3>
-                      //       <h5 class="card-title">${bodycare.nama_produk}</h5>
-                      //       <h6>${bodycare.usia}</h6>
-                      //       <h6 class="harga">Rp${bodycare.harga}</h6>
-                      //       <p class="card-text" style="color: black"></p>
-                      //       <div class="row d-flex align-items-center">
-                      //         <div class="col">
-                      //           <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
-                      //         </div>
-                      //         <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
-                      //           <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
-                      //           <h5>${formattedRating}</h5>
-                      //         </div>
-                      //       </div>
-                      //     </div>
-                      //   `;
+                        card.innerHTML = `
+                          <img src="/images/2744266.jpg" class="card-img" />
+                          <div class="card-body">
+                            <h3 class="merek-card text-center" >${bodycare.merk}</h3>
+                            <h5 class="card-title">${bodycare.nama_produk}</h5>
+                            <h6>${bodycare.usia}</h6>
+                            <h6 class="harga">Rp${bodycare.harga}</h6>
+                            <p class="card-text" style="color: black"></p>
+                            <div class="row d-flex align-items-center">
+                              <div class="col">
+                                <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
+                              </div>
+                              <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
+                                <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
+                                <h5>${formattedRating}</h5>
+                              </div>
+                            </div>
+                          </div>
+                        `;
 
-                      //   const button = card.querySelector(".detail-button");
-                      //   button.addEventListener("click", () => {
-                      //     $("#modal-rekomendasi #merekRekomendasi").html(`${bodycare.nama_produk}`);
-                      //     $("#modal-rekomendasi #usiaRekomendasi").html(`${bodycare.usia}`);
-                      //     $("#modal-rekomendasi #hargaRekomendasi").html(`Rp${bodycare.harga}`);
-                      //     $("#modal-rekomendasi #deskripsiRekomendasi").html(`<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`);
-                      //     $("#modal-rekomendasi #manfaatRekomendasi").html(`${bodycare.manfaat_produk}`);
-                      //     $("#modal-rekomendasi #masalahRekomendasi").html(`<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`);
+                        const button = card.querySelector(".detail-button");
+                        button.addEventListener("click", () => {
+                          $("#modal-rekomendasi #merekRekomendasi").html(`${bodycare.nama_produk}`);
+                          $("#modal-rekomendasi #usiaRekomendasi").html(`${bodycare.usia}`);
+                          $("#modal-rekomendasi #hargaRekomendasi").html(`Rp${bodycare.harga}`);
+                          $("#modal-rekomendasi #deskripsiRekomendasi").html(`<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`);
+                          $("#modal-rekomendasi #manfaatRekomendasi").html(`${bodycare.manfaat_produk}`);
+                          $("#modal-rekomendasi #masalahRekomendasi").html(`<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`);
 
                           
-                      //   });
+                        });
 
-                      //   // Tambahkan kartu ke container
-                      //   cardsContainer.appendChild(card);
+                        // Tambahkan kartu ke container
+                        cardsContainer.appendChild(card);
 
-                      //   $('#modal-pencarian').modal('hide');
-                       
-
-                        // if (bodycare === produkData[produkData.length - 1]) {
-                        //   $('#modal-pencarian').modal('hide');
-                        //   setTimeout(() => {
-                        //     $('html, body').animate({
-                        //       scrollTop: $("#rekomendasi").offset().top
-                        //     }, 2000);
-                        //   }, 500);
-                        // }
-
-                        
-                      // })
-                        // simpan data ke lokal storage
                         $('#modal-pencarian').modal('hide');
-                        localStorage.setItem("hasilCollaborative", JSON.stringify(produkData));
-
-                        setTimeout(() => {
-                          window.location.href = "#rekomendasi";
-                        }, 1000);
-
+                      })
                     } )
 
                 })
