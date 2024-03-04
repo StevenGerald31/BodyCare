@@ -282,7 +282,7 @@
                 class="col-sm-3 d-flex align-item-center"
                 style="width: 285px"
               >
-                <h2>Masalah Kulit :</h2>
+                <h2>Masalah Kulit  :</h2>
               </div>
               <div class="col-md-3">
                 <div class="dropdown">
@@ -294,7 +294,7 @@
                     aria-expanded="false"
                   >
                     <h6>Masalah Kulit</h6>
-                    <img src="/images/dropdown.png" alt="" />
+                    <h6>:</h6><img src="/images/dropdown.png" alt="" />
                   </button>
                   <ul
                     class="dropdown-menu"
@@ -1083,7 +1083,7 @@
                             <h3 class="merek-card text-center" >${bodycare.merk}</h3>
                             <h5 class="card-title">${bodycare.nama_produk}</h5>
                             <h6>${bodycare.usia}</h6>
-                            <h6 class="harga">Rp${bodycare.harga}</h6>
+                            <h6 class="harga">${bodycare.harga}</h6>
                             <p class="card-text" style="color: black"></p>
                             <div class="row d-flex align-items-center">
                               <div class="col">
@@ -1101,7 +1101,7 @@
                         button.addEventListener("click", () => {
                           $("#modal-rekomendasi #merekRekomendasi").html(`${bodycare.nama_produk}`);
                           $("#modal-rekomendasi #usiaRekomendasi").html(`${bodycare.usia}`);
-                          $("#modal-rekomendasi #hargaRekomendasi").html(`Rp${bodycare.harga}`);
+                          $("#modal-rekomendasi #hargaRekomendasi").html(`${bodycare.harga}`);
                           $("#modal-rekomendasi #deskripsiRekomendasi").html(`<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`);
                           $("#modal-rekomendasi #manfaatRekomendasi").html(`${bodycare.manfaat_produk}`);
                           $("#modal-rekomendasi #masalahRekomendasi").html(`<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`);
