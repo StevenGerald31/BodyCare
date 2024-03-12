@@ -39,8 +39,8 @@
         <h2>
           <span>Welcome to Glow Your Skin!!</span>
           <p>
-            Temukan keindahan alami melalui produk perawatan tubuh kami yang
-            dirancang untuk menyegarkan dan merawat kecantikan Anda.
+            Temukan keindahan alami melalui website kami yang dirancang untuk membantu Anda dalam merawat kulit 
+            menjadi lebih sehat dan bersinar!
           </p>
         </h2>
 
@@ -64,9 +64,9 @@
         <div class="section-title">
           <h2>Fitur Penjelajahan</h2>
           <p style="max-width: 1200px">
-            "Temukan kecantikan kulit alami mu dengan fitur penjelajahan terbaru dalam website bodycare kami! Dengan navigasi yang intuitif, eksplorasi produk-produk 
+            Temukan kecantikan kulit alami mu dengan fitur penjelajahan terbaru dalam website bodycare kami! Dengan navigasi yang intuitif, eksplorasi produk-produk 
             terbaik untuk perawatan kuitmu menjadi lebih menyenangkan. Dari produk body wash hingga body scrub untuk mendapatkan kulit sehat dan berseri dengan
-            bantuan fitur penjelajahan"
+            bantuan fitur penjelajahan.
           </p>
         </div>
 
@@ -186,9 +186,9 @@
         <div class="section-title">
           <h2>Pencarian</h2>
           <p>
-            "Temukan keindahan kulitmu dengan fitur pencarian canggih dalam website perawatan kulit kami! Dengan algoritma yang baik, menemukan produk bodycare
+            Temukan keindahan kulitmu dengan fitur pencarian canggih dalam website perawatan kulit kami! Dengan algoritma yang baik, menemukan produk bodycare
             yang sesuai dengan kebutuhan kulitmu. Dari body wash hingga body scrub yang dapat membuat kulitmu menjadi sehat dan bersinar. Ayo mulai perjalanan
-            kecantikan kulitmu sekarang dengan fitur pencarian terbaik di website bodycare kami!"
+            kecantikan kulitmu sekarang dengan fitur pencarian terbaik di website bodycare kami!
           </p>
         </div>
 
@@ -469,9 +469,9 @@
         <div class="section-title">
           <h2>Rekomendasi</h2>
           <p>
-            "Temukan keindahan kulitmu dengan fitur pencarian canggih dalam website perawatan kulit kami! Dengan algoritma yang baik, menemukan produk bodycare
-            yang sesuai dengan kebutuhan kulitmu. Dari body wash hingga body scrub yang dapat membuat kulitmu menjadi sehat dan bersinar. Ayo mulai perjalanan
-            kecantikan kulitmu sekarang dengan fitur pencarian terbaik di website bodycare kami!"
+            Temukan keindahan kulitmu dengan fitur rekomendasi canggih dalam website perawatan kulit kami! Mulai dari rekomendasi body wash hingga body scrub yang 
+            dapat membuat kulitmu menjadi sehat dan bersinar. Ayo mulai perjalanan kecantikan kulitmu sekarang dengan fitur rekomendasi terbaik di website bodycare 
+            kami!
           </p>
         </div>
 
@@ -1083,7 +1083,7 @@
                             <h3 class="merek-card text-center" >${bodycare.merk}</h3>
                             <h5 class="card-title">${bodycare.nama_produk}</h5>
                             <h6>${bodycare.usia}</h6>
-                            <h6 class="harga">Rp${bodycare.harga}</h6>
+                            <h6 class="harga">${bodycare.harga}</h6>
                             <p class="card-text" style="color: black"></p>
                             <div class="row d-flex align-items-center">
                               <div class="col">
@@ -1101,7 +1101,7 @@
                         button.addEventListener("click", () => {
                           $("#modal-rekomendasi #merekRekomendasi").html(`${bodycare.nama_produk}`);
                           $("#modal-rekomendasi #usiaRekomendasi").html(`${bodycare.usia}`);
-                          $("#modal-rekomendasi #hargaRekomendasi").html(`Rp${bodycare.harga}`);
+                          $("#modal-rekomendasi #hargaRekomendasi").html(`${bodycare.harga}`);
                           $("#modal-rekomendasi #deskripsiRekomendasi").html(`<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`);
                           $("#modal-rekomendasi #manfaatRekomendasi").html(`${bodycare.manfaat_produk}`);
                           $("#modal-rekomendasi #masalahRekomendasi").html(`<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`);
