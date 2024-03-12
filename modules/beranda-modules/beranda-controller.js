@@ -1,6 +1,7 @@
 const getBaseUrl = require("../../utils/getBaseUrl");
 const { sequelize, Sequelize } = require("../../db");
 const SparqlClient = require("sparql-http-client");
+const admin = require("../model/admin-model")
 
 const pageDashboard = async (req, res) => {
   try {
@@ -47,6 +48,23 @@ const pageAdmin = async (req, res) => {
       statusCode: 500,
       message: "Terjadi Kesalahan Sistem",
     });
+  }
+};
+
+// login admin
+const loginAdmin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const adminuser = await admin.findOne({ where: { email, password } });
+    if (!adminuser) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    pageAdmin(req, res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while logging in" });
   }
 };
 
@@ -200,4 +218,4 @@ const hasilAlgoritma = async (req, res) => {
 };
 
 
-module.exports = { pageDashboard, pageLogin, pageAdmin, executeQueryByMerek, pencarian, dataTransaksi, dataAlgoritma, hasilAlgoritma };
+module.exports = { pageDashboard, pageLogin, pageAdmin, loginAdmin, executeQueryByMerek, pencarian, dataTransaksi, dataAlgoritma, hasilAlgoritma };

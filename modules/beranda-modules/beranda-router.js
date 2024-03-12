@@ -62,5 +62,7 @@ router.get("/pencarian", async (req, res) => {
 router.get("/dataTransaksi", dashboardController.dataTransaksi)
 router.get("/dataAlgoritma", dashboardController.dataAlgoritma)
 router.post("/dataHasilAlgoritma", dashboardController.hasilAlgoritma)
+// router untuk proses login
+router.post("/loginAdmin", dashboardController.loginAdmin);
 
 module.exports = router;
