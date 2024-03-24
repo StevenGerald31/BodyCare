@@ -19,6 +19,38 @@ const pageDashboard = async (req, res) => {
   }
 };
 
+const pageFormUserBaru = async (req, res) => {
+  try {
+    return res.render("formuserbaru", {
+      baseUrl: getBaseUrl(req),
+      session: req.session,
+      user: req.user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Terjadi Kesalahan Sistem",
+    });
+  }
+};
+
+const pageSiginSigupUser = async (req, res) => {
+  try {
+    return res.render("siginsigupuser", {
+      baseUrl: getBaseUrl(req),
+      session: req.session,
+      user: req.user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Terjadi Kesalahan Sistem",
+    });
+  }
+};
+
 const pageLogin = async (req, res) => {
   try {
     return res.render("login", {
@@ -218,4 +250,4 @@ const hasilAlgoritma = async (req, res) => {
 };
 
 
-module.exports = { pageDashboard, pageLogin, pageAdmin, loginAdmin, executeQueryByMerek, pencarian, dataTransaksi, dataAlgoritma, hasilAlgoritma };
+module.exports = { pageDashboard, pageLogin, pageFormUserBaru, pageAdmin, pageSiginSigupUser, loginAdmin, executeQueryByMerek, pencarian, dataTransaksi, dataAlgoritma, hasilAlgoritma };

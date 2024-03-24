@@ -13,10 +13,9 @@ html {
 }
 
 .card {
-  height: 80%;
-  width: 80%; /* Sesuaikan dengan lebar maksimum yang diinginkan */
-  padding-left: 200px;
-  padding-right: 200px;
+  height: 50%;
+  width: 50%; /* Sesuaikan dengan lebar maksimum yang diinginkan */
+  padding: 100px;
   padding-top: 40px;
 }
 
@@ -26,8 +25,12 @@ h2 {
   color: #c48a6b;
 }
 
+h5 {
+  text-align: center;
+}
+
 .btn {
-    background-color: #c48a6b;
-    color: aliceblue;
-    border: none;
+  background-color: #c48a6b;
+  color: aliceblue;
+  border: none;
 }

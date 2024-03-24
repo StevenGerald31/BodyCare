@@ -11,6 +11,8 @@ router.get("/login", dashboardController.pageLogin);
 
 // ini bagian orek orek semua
 
+router.get("/formuserbaru", dashboardController.pageFormUserBaru);
+router.get("/siginsigup", dashboardController.pageSiginSigupUser);
 router.get("/login", dashboardController.pageLogin);
 router.get("/admin", dashboardController.pageAdmin);
 // router.get("/ontology-data", ontology.getDataFromOntology);
