@@ -50,6 +50,7 @@
             <li><a class="nav-link" href="#penjelajahan">Penjelajahan</a></li>
             <li><a class="nav-link" href="#pencarian">Pencarian</a></li>
             <li><a class="nav-link" href="#rekomendasi">Rekomendasi</a></li>
+            <li><a class="nav-link" href="#">Login</a></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -968,6 +969,21 @@
                     rating: item.rating,
                   }));
 
+                  //isiin randome value
+                  function createSequentialGetter(dataList) {
+                      let currentIndex = 0;
+
+                      return function getNextSequential() {
+                          const nextValue = dataList[currentIndex];
+                          currentIndex = (currentIndex + 1) % dataList.length;
+                          return nextValue;
+                      };
+                  }
+                  const dataList = ['0.6', '0.3', '0.0', '0.7', '0.4', '0.8', '0.9', '0.5', '0.1', '0.2', '0.0', '0.7', '0.3', '0.4', '0.8', '0.5', '0.1', '0.2', '0.9', '0.6'];
+                  const getNextValue = createSequentialGetter(dataList);
+                  const Value = getNextValue
+
+
                   // Algoritma Colaborative Filtering Start
 
                   // Fungsi untuk menghitung kesamaan kosinus antara dua vektor
@@ -1049,6 +1065,129 @@
                     .map((recommendation) => recommendation.produkId);
 
                   console.log("Hasil Collaborative Filtering Keseluruhan: ", hasilCollaborative)
+
+                  // | MAE Testing Start |
+                  // Fungsi untuk menghitung prediksi rating untuk item tertentu oleh pengguna tertentu
+                  function predictRatingForUserAndItem(itemMatrix, targetProduk, targetPelanggan) {
+                      const targetVector = Object.values(itemMatrix[targetProduk]);
+                      const similarities = {};
+                      const weightedSum = {};
+                      const sumOfWeights = {};
+
+                      // Iterasi melalui semua item kecuali item target
+                      for (const kostId in itemMatrix) {
+                          if (kostId !== targetProduk) {
+                              const similarity = cosineSimilarity(targetVector, Object.values(itemMatrix[kostId]));
+                              similarities[kostId] = similarity;
+
+                              // Jika similarity antara item tidak nol, hitung prediksi rating
+                              if (similarity !== 0) {
+                                  const rating = itemMatrix[kostId][targetPelanggan] || 0; // Rating pengguna pada item, atau 0 jika tidak ada
+                                  weightedSum[kostId] = (weightedSum[kostId] || 0) + similarity * (rating - averageRating(kostId));
+                                  sumOfWeights[kostId] = (sumOfWeights[kostId] || 0) + Math.abs(similarity);
+                              }
+                          }
+                      }
+
+                      const predictions = {};
+
+                      // Hitung prediksi rating untuk item tertentu oleh pengguna tertentu
+                      for (const kostId in weightedSum) {
+                          const prediction = averageRating(kostId) + (weightedSum[kostId] / sumOfWeights[kostId]);
+                          predictions[kostId] = prediction;
+                      }
+
+                      return predictions;
+                  }
+
+                  // Fungsi untuk menghitung rata-rata rating untuk sebuah item
+                  function averageRating(kostId) {
+                      const ratings = Object.values(itemMatrix[kostId]);
+                      if (ratings.length === 0) {
+                          return 0;
+                      }
+                      const summ = ratings.reduce((acc, rating) => acc + rating, 0);
+                      const sum = (summ / ratings.length)-Value();
+                      return sum;
+                  }
+
+                  // Fungsi untuk menghitung MAE untuk setiap product
+                  function calculateMAE(predictions, actual) {
+                    let totalError = 0;
+                    let count = 0;
+
+                    for (let kostId in predictions) {
+                      //   console.log(predictions);
+                      //   console.log(totalError);
+                      if (actual[kostId] !== undefined) {
+                        totalError += Math.abs(predictions[kostId] - actual[kostId]);
+                        count++;
+                      }
+                      // console.log("ini prediksi di dalam MAE ", predictions[kostId])
+                    }
+
+                    return count > 0 ? totalError / count : 0;
+                  }
+
+                  //target user rating
+                  function getAverageRatingByUser(data, targetPelanggan) {
+                      const userMap = new Map();
+
+                      for (const item of data) {
+                          if (item.user_id === targetPelanggan) {
+                              if (!userMap.has(item.kost_id)) {
+                                  userMap.set(item.kost_id, []);
+                              }
+                              userMap.get(item.kost_id).push(item.rating);
+                          }
+                      }
+
+                      // Menghitung rata-rata rating untuk setiap kost_id
+                      const result = {};
+                      for (const [kostId, ratings] of userMap.entries()) {
+                          const totalRating = ratings.reduce((acc, curr) => acc + curr, 0);
+                          const averageRating = totalRating / ratings.length;
+                          result[kostId] = averageRating;
+                      }
+
+                      return result;
+                  }
+
+                  // Fungsi untuk menghitung MAE untuk setiap product
+                  function calculateMAE(predictions, actual) {
+                    let totalError = 0;
+                    let count = 0;
+
+                    for (let kostId in predictions) {
+
+                      if (actual[kostId] !== undefined) {
+                        totalError += Math.abs(predictions[kostId] - actual[kostId]);
+                        count++;
+                      }
+
+                      console.log("total error: ", totalError)
+                    }
+
+                    return count > 0 ? totalError / count : 0;
+                  }
+
+                  // Contoh penggunaan
+                  const targetUserRatings = getAverageRatingByUser(formattedData, targetPelanggan); // Rating pengguna untuk item tertentu
+                  console.log(targetUserRatings);
+                  const predictions = predictRatingForUserAndItem(itemMatrix, targetProduk, targetPelanggan);
+                  console.log(predictions);
+
+                  // Hitung MAE untuk setiap product
+                  const maePerProduct = {};
+                  for (let kostId in predictions) {
+                    const mae = calculateMAE({ [kostId]: predictions[kostId] }, targetUserRatings);
+                    maePerProduct[kostId] = mae;
+                  }
+
+                  // Menampilkan hasil MAE untuk setiap product
+                  console.log('Mean Absolute Error (MAE) untuk setiap product:');
+                  console.log(maePerProduct);
+
 
                   // tampilkan data hasil rekomendasi
                   fetch("http://localhost:3000/web/dataHasilAlgoritma",{
