@@ -171,32 +171,33 @@
     </div>
 
     <script>
-      document.getElementById('submitButton').addEventListener('click', function(event) {
-        event.preventDefault(); // Menghentikan perilaku default dari tombol submit
+      const form = document.querySelector('form');
 
-        // Mendapatkan nilai dari input
-        var username = document.getElementById('exampleInputUsername').value;
-        var password = document.getElementById('exampleInputPassword1').value;
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-        console.log('username: ',username);
-        console.log('password: ',password);
+            const formData = new FormData(form);
 
+            try {
+                const response = await fetch('/web/signUp', {
+                    method: 'POST',
+                    body: formData
+                });
 
-        // Membuat objek untuk menyimpan data
-        var data = {
-            username: username,
-            password: password
-        };
+                const data = await response.json();
 
-        // Mengubah objek data menjadi string JSON
-        var jsonData = JSON.stringify(data);
-
-        // Menyimpan data ke dalam localStorage dengan kunci 'formData'
-        localStorage.setItem('formData', jsonData);
-
-        // Memberi tahu pengguna bahwa data telah disimpan
-        alert('Data telah disimpan ke dalam localStorage.');
-      });
+                if (response.ok) {
+                    // Menampilkan pesan pop-up jika pengguna berhasil ditambahkan
+                    alert(data.message);
+                    form.reset(); // Mengosongkan formulir setelah berhasil ditambahkan
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+      
     </script>
 
   </body>

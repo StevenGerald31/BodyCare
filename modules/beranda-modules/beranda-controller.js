@@ -196,8 +196,8 @@ const signUpUser = async (req,res) => {
   const { username, alamat, no_hp, password } = req.body;
 
   try {
-    const newUser = await user.creat({username, alamat, no_hp, password})
-    res.status(201).json({ message: "User created successfully", user: newUser });
+    const newUser = await user.create({username, alamat, no_hp, password})
+    res.redirect('/web/siginsigup')
     console.log("new user: ", newUser)
   } catch (error) {
     res.status(500).json({ error: "An error occurred while creating user" });
