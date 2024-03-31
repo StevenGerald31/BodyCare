@@ -13,6 +13,8 @@ router.get("/login", dashboardController.pageLogin);
 
 router.get("/formuserbaru", dashboardController.pageFormUserBaru);
 router.get("/siginsigup", dashboardController.pageSiginSigupUser);
+router.post("/signIn", dashboardController.signInUser)
+router.post("/signUp", dashboardController.signUpUser)
 router.get("/login", dashboardController.pageLogin);
 router.get("/admin", dashboardController.pageAdmin);
 // router.get("/ontology-data", ontology.getDataFromOntology);
@@ -60,6 +62,9 @@ router.get("/pencarian", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 })
+
+router.post('/masalahKulit', dashboardController.dataMasalahKulit)
+router.get('/rekomendasiNewUSer', dashboardController.rekomendasiUserNew)
 
 router.get("/dataTransaksi", dashboardController.dataTransaksi)
 router.get("/dataAlgoritma", dashboardController.dataAlgoritma)

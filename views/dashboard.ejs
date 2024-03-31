@@ -50,7 +50,7 @@
             <li><a class="nav-link" href="#penjelajahan">Penjelajahan</a></li>
             <li><a class="nav-link" href="#pencarian">Pencarian</a></li>
             <li><a class="nav-link" href="#rekomendasi">Rekomendasi</a></li>
-            <li><a class="nav-link" href="#">Login</a></li>
+            <li><a class="nav-link" href="/web/siginsigup">Login</a></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -663,7 +663,74 @@
     <script src="<%= baseUrl %>/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="<%= baseUrl %>/vendor/php-email-form/validate.js"></script>
 
+    
+    
     <script>
+
+      // Ambil nilai id_pelanggan dari templat JavaScript
+  const id_pelanggan = <%= JSON.stringify(id_pelanggan) %>;
+
+// Tampilkan nilai id_pelanggan dalam konsol browser
+console.log("ID Pelanggan:", id_pelanggan);
+      
+      window.addEventListener('DOMContentLoaded', () => {
+    const rekomendasiLink = document.querySelector('a[href="#rekomendasi"]');
+    const loginLink = document.querySelector('a[href="/web/siginsigup"]');
+
+    // Cek apakah pengguna sudah login atau belum
+    const isLoggedIn = () => {
+      // Ubah cara kita memeriksa apakah pengguna sudah login atau belum
+      return '{{session.user}}' !== 'undefined' && '{{session.user}}' !== 'null';
+    };
+
+    // Fungsi untuk mengatur tautan navbar
+    const setNavbarLinks = () => {
+      if (isLoggedIn()) {
+        rekomendasiLink.href = "#rekomendasi";
+        loginLink.textContent = "Logout";
+      } else {
+        rekomendasiLink.href = "/web/siginsigup";
+        loginLink.textContent = "Login";
+      }
+    };
+
+    // Panggil fungsi setNavbarLinks saat halaman dimuat
+    setNavbarLinks();
+
+    // Event listener untuk logout
+    loginLink.addEventListener('click', () => {
+      if (isLoggedIn()) {
+        // Lakukan sesuatu seperti menghapus sesi di sisi server
+        // Setelah logout, arahkan pengguna ke halaman dashboard
+        window.location.href = "/web/dashboard"; // Sesuaikan dengan rute logout Anda
+      }
+    });
+  });
+
+  // Mendapatkan data dari localStorage dengan kunci 'formData'
+//   var storedData = localStorage.getItem('formData');
+
+//   document.addEventListener('DOMContentLoaded', function() {
+//     // Mendapatkan data dari localStorage dengan kunci 'formData'
+//     var storedData = localStorage.getItem('formData');
+
+//     // Memeriksa apakah ada data yang disimpan di localStorage
+//     if (storedData) {
+//         // Parsing string JSON menjadi objek JavaScript
+//         var data = JSON.parse(storedData);
+
+//         // Menampilkan data di console log
+//         console.log('Data yang disimpan:');
+//         console.log('Username:', data.username);
+//         console.log('Password:', data.password);
+//     } else {
+//         // Jika tidak ada data yang disimpan, menampilkan pesan
+//         console.log('Tidak ada data yang disimpan.');
+//     }
+// });
+ 
+
+
       (function () {
         "use strict";
 
@@ -682,7 +749,7 @@
         /**
          * Easy event listener function
          */
-        const on = (type, el, listener, all = false) => {
+        const on = (type, el, listener, all = false) => {  
           let selectEl = select(el, all);
 
           if (selectEl) {
@@ -1126,30 +1193,16 @@
                 const id_target = distinctProductIds.join(",");
                 console.log("Distinct ID Product", id_target);
 
-              // algoritma collaborative Filtering Start
-              fetch(`http://localhost:3000/web/dataAlgoritma`)
-                .then(response => response.json())
-                .then(dataAlgoritma => {
-                  const formattedData = dataAlgoritma.map((item) => ({
-                    user_id: item.id_pelanggan,
-                    produk_id: item.id_produk,
-                    rating: item.rating,
-                  }));
-
-                  //isiin randome value
-                  function createSequentialGetter(dataList) {
-                      let currentIndex = 0;
-
-                      return function getNextSequential() {
-                          const nextValue = dataList[currentIndex];
-                          currentIndex = (currentIndex + 1) % dataList.length;
-                          return nextValue;
-                      };
-                  }
-                  const dataList = ['0.6', '0.3', '0.0', '0.7', '0.4', '0.8', '0.9', '0.5', '0.1', '0.2', '0.0', '0.7', '0.3', '0.4', '0.8', '0.5', '0.1', '0.2', '0.9', '0.6'];
-                  const getNextValue = createSequentialGetter(dataList);
-                  const Value = getNextValue
-
+                // algoritma collaborative Filtering Start
+                fetch(`http://localhost:3000/web/dataAlgoritma`)
+                  .then((response) => response.json())
+                  .then((dataAlgoritma) => {
+                    const formattedData = dataAlgoritma.map((item) => ({
+                      transaksi_id: item.id_transaksi,
+                      user_id: item.id_pelanggan,
+                      produk_id: item.id_produk,
+                      rating: item.rating,
+                    }));
 
                     //========================================//
                     // Algoritma Colaborative Filtering Start //
@@ -1337,269 +1390,230 @@
 
                     // jalankan algoritma
                     const itemMatrix = createItemMatrix(formattedData);
-                    const targetProduk = id_target; // Sesuaikan dengan ID yang sesuai pada data
-                    const targetPelanggan = 2; // Sesuaikan dengan ID user yang sesuai
-                    const recommendations = getItemRecommendations(
-                      itemMatrix,
-                      targetProduk,
-                      targetPelanggan
-                    );
 
-                    console.log("Nilai rekomendasi : ", recommendations);
-                    console.log("data : ", formattedData);
+                    const isIdPelangganInUserId = formattedData.filter(item => item.user_id === id_pelanggan).length > 0;
 
-                    // Rating pengguna untuk item tertentu
-                    const targetPelangganRatings = getAverageRatingByUser(
-                      formattedData,
-                      targetPelanggan
-                    );
-                    console.log(
-                      "Rating pengguna untuk item tertentu:",
-                      targetPelangganRatings
-                    );
+                    console.log("id Id: ", isIdPelangganInUserId)
 
-                    // Prediksi rating pengguna untuk item tertentu
-                    const predictions = predictRatingForUserAndItem(
-                      itemMatrix,
-                      targetProduk,
-                      targetPelanggan
-                    );
-                    console.log(
-                      "Prediksi rating pengguna untuk item tertentu: ",
-                      predictions
-                    );
+                    if (isIdPelangganInUserId) {
+                      // cari data rating terakhir sesuai id_pelanggan yang login tapi nilai rating > 3
+                      const filteredData = formattedData.filter(item => {
+                        return dataAlgoritma.user_id === id_pelanggan && item.rating > 3;
+                      })
 
-                    // Hitung MAE untuk setiap product
-                    const maePerProduct = {};
-                    for (let produk_id in predictions) {
-                      const mae = calculateMAE(
-                        { [produk_id]: predictions[produk_id] },
+                      // ambil data yang terakhir
+                      const dataLastRating = filteredData[filteredData.length - 1]; 
+
+                      console.log('data baru: ', dataLastRating)
+
+                      const targetProduk = id_target; // Sesuaikan dengan ID yang sesuai pada data
+                      const targetPelanggan = id_pelanggan; // Sesuaikan dengan ID user yang sesuai
+                      const recommendations = getItemRecommendations(
+                        itemMatrix,
+                        targetProduk,
+                        targetPelanggan
+                      );
+
+                      console.log("Nilai rekomendasi : ", recommendations);
+                      console.log("data : ", formattedData);
+
+                      // Rating pengguna untuk item tertentu
+                      const targetPelangganRatings = getAverageRatingByUser(
+                        formattedData,
+                        targetPelanggan
+                      );
+                      console.log(
+                        "Rating pengguna untuk item tertentu:",
                         targetPelangganRatings
                       );
-                      maePerProduct[produk_id] = mae;
-                    }
 
-                    // Menampilkan hasil MAE untuk setiap product
-                    console.log(
-                      "Mean Absolute Error (MAE) untuk setiap product:",
-                      maePerProduct
-                    );
+                      // Prediksi rating pengguna untuk item tertentu
+                      const predictions = predictRatingForUserAndItem(
+                        itemMatrix,
+                        targetProduk,
+                        targetPelanggan
+                      );
+                      console.log(
+                        "Prediksi rating pengguna untuk item tertentu: ",
+                        predictions
+                      );
 
-                    // ambil 10 produk paling atas aja sebagai rekomendasi
-                    // const hasilCollaborative = recommendations
-                    //   .map((recommendation) => recommendation.produkId)
-                    //   .slice(0, 10);
+                      // Hitung MAE untuk setiap product
+                      const maePerProduct = {};
+                      for (let produk_id in predictions) {
+                        const mae = calculateMAE(
+                          { [produk_id]: predictions[produk_id] },
+                          targetPelangganRatings
+                        );
+                        maePerProduct[produk_id] = mae;
+                      }
 
-                    const hasilCollaborative = recommendations
+                      // Menampilkan hasil MAE untuk setiap product
+                      console.log(
+                        "Mean Absolute Error (MAE) untuk setiap product:",
+                        maePerProduct
+                      );
+
+                      const hasilCollaborative = recommendations
                       .sort((a, b) => b.similarity - a.similarity) // Urutkan berdasarkan similarity tertinggi
                       .map((recommendation) => recommendation.produkId) // Ambil produkId
                       .slice(0, 10); // Ambil 10 teratas
 
-                    const hasilCollaborativeSemua = recommendations.map(
-                      (recommendation) => recommendation.produkId
-                    );
+                      const hasilCollaborativeSemua = recommendations.map(
+                        (recommendation) => recommendation.produkId
+                      );
 
-                  console.log("Hasil Collaborative Filtering Keseluruhan: ", hasilCollaborative)
+                      console.log(
+                        "Hasil Collaborative Filtering Keseluruhan: ",
+                        hasilCollaborative
+                      );
 
-                  // | MAE Testing Start |
-                  // Fungsi untuk menghitung prediksi rating untuk item tertentu oleh pengguna tertentu
-                  function predictRatingForUserAndItem(itemMatrix, targetProduk, targetPelanggan) {
-                      const targetVector = Object.values(itemMatrix[targetProduk]);
-                      const similarities = {};
-                      const weightedSum = {};
-                      const sumOfWeights = {};
+                      // tampilkan data hasil rekomendasi
+                      fetch("http://localhost:3000/web/dataHasilAlgoritma", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          produkHasilId: hasilCollaborative,
+                        }),
+                      })
+                        .then((response) => response.json())
+                        .then((produkData) => {
+                          console.log("HAsil: ", produkData);
 
-                      // Iterasi melalui semua item kecuali item target
-                      for (const kostId in itemMatrix) {
-                          if (kostId !== targetProduk) {
-                              const similarity = cosineSimilarity(targetVector, Object.values(itemMatrix[kostId]));
-                              similarities[kostId] = similarity;
+                          const cardsContainer =
+                            document.getElementById("card-rekomendasi");
+                          cardsContainer.innerHTML = "";
 
-                              // Jika similarity antara item tidak nol, hitung prediksi rating
-                              if (similarity !== 0) {
-                                  const rating = itemMatrix[kostId][targetPelanggan] || 0; // Rating pengguna pada item, atau 0 jika tidak ada
-                                  weightedSum[kostId] = (weightedSum[kostId] || 0) + similarity * (rating - averageRating(kostId));
-                                  sumOfWeights[kostId] = (sumOfWeights[kostId] || 0) + Math.abs(similarity);
-                              }
-                          }
-                      }
+                          // buat kedalam card
+                          produkData.forEach((bodycare) => {
+                            console.log("Bodycare: ", bodycare);
 
-                      const predictions = {};
+                            const card = document.createElement("div");
+                            card.className = "card pilihan";
 
-                      // Hitung prediksi rating untuk item tertentu oleh pengguna tertentu
-                      for (const kostId in weightedSum) {
-                          const prediction = averageRating(kostId) + (weightedSum[kostId] / sumOfWeights[kostId]);
-                          predictions[kostId] = prediction;
-                      }
+                            const rating = bodycare.rating;
+                            const formattedRating = parseFloat(rating).toFixed(1);
 
-                      return predictions;
-                  }
+                            card.innerHTML = `
+                            <img src="/images/2744266.jpg" class="card-img" />
+                            <div class="card-body">
+                              <h3 class="merek-card text-center" >${bodycare.merk}</h3>
+                              <h5 class="card-title">${bodycare.nama_produk}</h5>
+                              <h6>${bodycare.usia}</h6>
+                              <h6 class="harga">${bodycare.harga}</h6>
+                              <p class="card-text" style="color: black"></p>
+                              <div class="row d-flex align-items-center">
+                                <div class="col">
+                                  <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
+                                </div>
+                                <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
+                                  <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
+                                  <h5>${formattedRating}</h5>
+                                </div>
+                              </div>
+                            </div>
+                          `;
 
-                  // Fungsi untuk menghitung rata-rata rating untuk sebuah item
-                  function averageRating(kostId) {
-                      const ratings = Object.values(itemMatrix[kostId]);
-                      if (ratings.length === 0) {
-                          return 0;
-                      }
-                      const summ = ratings.reduce((acc, rating) => acc + rating, 0);
-                      const sum = (summ / ratings.length)-Value();
-                      return sum;
-                  }
+                            const button = card.querySelector(".detail-button");
+                            button.addEventListener("click", () => {
+                              $("#modal-rekomendasi #merekRekomendasi").html(
+                                `${bodycare.nama_produk}`
+                              );
+                              $("#modal-rekomendasi #usiaRekomendasi").html(
+                                `${bodycare.usia}`
+                              );
+                              $("#modal-rekomendasi #hargaRekomendasi").html(
+                                `${bodycare.harga}`
+                              );
+                              $("#modal-rekomendasi #deskripsiRekomendasi").html(
+                                `<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`
+                              );
+                              $("#modal-rekomendasi #manfaatRekomendasi").html(
+                                `${bodycare.manfaat_produk}`
+                              );
+                              $("#modal-rekomendasi #masalahRekomendasi").html(
+                                `<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`
+                              );
+                            });
 
-                  // Fungsi untuk menghitung MAE untuk setiap product
-                  function calculateMAE(predictions, actual) {
-                    let totalError = 0;
-                    let count = 0;
+                            // Tambahkan kartu ke container
+                            cardsContainer.appendChild(card);
 
-                    for (let kostId in predictions) {
-                      //   console.log(predictions);
-                      //   console.log(totalError);
-                      if (actual[kostId] !== undefined) {
-                        totalError += Math.abs(predictions[kostId] - actual[kostId]);
-                        count++;
-                      }
-                      // console.log("ini prediksi di dalam MAE ", predictions[kostId])
-                    }
+                            $("#modal-pencarian").modal("hide");
+                          });
+                        });
+                    } else {
+                      fetch ('http://localhost:3000/web/rekomendasiNewUser')
+                      .then((respons) => respons.json())
+                      .then((dataNewUser) => {
+                        console.log("data new User: ", dataNewUser)
 
-                    return count > 0 ? totalError / count : 0;
-                  }
-
-                  //target user rating
-                  function getAverageRatingByUser(data, targetPelanggan) {
-                      const userMap = new Map();
-
-                      for (const item of data) {
-                          if (item.user_id === targetPelanggan) {
-                              if (!userMap.has(item.kost_id)) {
-                                  userMap.set(item.kost_id, []);
-                              }
-                              userMap.get(item.kost_id).push(item.rating);
-                          }
-                      }
-
-                      // Menghitung rata-rata rating untuk setiap kost_id
-                      const result = {};
-                      for (const [kostId, ratings] of userMap.entries()) {
-                          const totalRating = ratings.reduce((acc, curr) => acc + curr, 0);
-                          const averageRating = totalRating / ratings.length;
-                          result[kostId] = averageRating;
-                      }
-
-                      return result;
-                  }
-
-                  // Fungsi untuk menghitung MAE untuk setiap product
-                  function calculateMAE(predictions, actual) {
-                    let totalError = 0;
-                    let count = 0;
-
-                    for (let kostId in predictions) {
-
-                      if (actual[kostId] !== undefined) {
-                        totalError += Math.abs(predictions[kostId] - actual[kostId]);
-                        count++;
-                      }
-
-                      console.log("total error: ", totalError)
-                    }
-
-                    return count > 0 ? totalError / count : 0;
-                  }
-
-                  // Contoh penggunaan
-                  const targetUserRatings = getAverageRatingByUser(formattedData, targetPelanggan); // Rating pengguna untuk item tertentu
-                  console.log(targetUserRatings);
-                  // const predictions = predictRatingForUserAndItem(itemMatrix, targetProduk, targetPelanggan);
-                  // console.log(predictions);
-
-                  // // Hitung MAE untuk setiap product
-                  // const maePerProduct = {};
-                  // for (let kostId in predictions) {
-                  //   const mae = calculateMAE({ [kostId]: predictions[kostId] }, targetUserRatings);
-                  //   maePerProduct[kostId] = mae;
-                  // }
-
-                  // Menampilkan hasil MAE untuk setiap product
-                  console.log('Mean Absolute Error (MAE) untuk setiap product:');
-                  console.log(maePerProduct);
-
-
-                    // tampilkan data hasil rekomendasi
-                    fetch("http://localhost:3000/web/dataHasilAlgoritma", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        produkHasilId: hasilCollaborative,
-                      }),
-                    })
-                      .then((response) => response.json())
-                      .then((produkData) => {
-                        console.log("HAsil: ", produkData);
-
-                        const cardsContainer =
-                          document.getElementById("card-rekomendasi");
+                        const cardsContainer = document.getElementById("card-rekomendasi")
                         cardsContainer.innerHTML = "";
 
-                        // buat kedalam card
-                        produkData.forEach((bodycare) => {
-                          console.log("Bodycare: ", bodycare);
+                        // masukkan data kedaldam card
+                        dataNewUser.forEach((dataNewUser) => {
 
-                          const card = document.createElement("div");
+                          const card = document.createElement('div');
                           card.className = "card pilihan";
 
-                          const rating = bodycare.rating;
+                          const rating = dataNewUser.avg_rating;
                           const formattedRating = parseFloat(rating).toFixed(1);
 
                           card.innerHTML = `
                           <img src="/images/2744266.jpg" class="card-img" />
-                          <div class="card-body">
-                            <h3 class="merek-card text-center" >${bodycare.merk}</h3>
-                            <h5 class="card-title">${bodycare.nama_produk}</h5>
-                            <h6>${bodycare.usia}</h6>
-                            <h6 class="harga">${bodycare.harga}</h6>
-                            <p class="card-text" style="color: black"></p>
-                            <div class="row d-flex align-items-center">
-                              <div class="col">
-                                <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
-                              </div>
-                              <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
-                                <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
-                                <h5>${formattedRating}</h5>
+                            <div class="card-body">
+                              <h3 class="merek-card text-center" >${dataNewUser.merk}</h3>
+                              <h5 class="card-title">${dataNewUser.nama_produk}</h5>
+                              <h6>${dataNewUser.usia}</h6>
+                              <h6 class="harga">${dataNewUser.harga}</h6>
+                              <p class="card-text" style="color: black"></p>
+                              <div class="row d-flex align-items-center">
+                                <div class="col">
+                                  <a class="btn btn-warning detail-button" data-bs-target="#modal-rekomendasi" data-bs-toggle="modal">Lihat Detail</a>
+                                </div>
+                                <div class="col d-flex justify-content-end fw-bold" style="margin-right: 3%">
+                                  <img src="/images/icons8-star-48.png" style="width: 20%" class="d-inline-block align-item-center me-1" />
+                                  <h5>${formattedRating}</h5>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        `;
+                          `
 
                           const button = card.querySelector(".detail-button");
                           button.addEventListener("click", () => {
                             $("#modal-rekomendasi #merekRekomendasi").html(
-                              `${bodycare.nama_produk}`
-                            );
-                            $("#modal-rekomendasi #usiaRekomendasi").html(
-                              `${bodycare.usia}`
-                            );
-                            $("#modal-rekomendasi #hargaRekomendasi").html(
-                              `${bodycare.harga}`
-                            );
-                            $("#modal-rekomendasi #deskripsiRekomendasi").html(
-                              `<strong>Deskripsi :</strong> ${bodycare.deskripsi_produk}`
-                            );
-                            $("#modal-rekomendasi #manfaatRekomendasi").html(
-                              `${bodycare.manfaat_produk}`
-                            );
-                            $("#modal-rekomendasi #masalahRekomendasi").html(
-                              `<strong>Masalah Kulit :</strong> ${bodycare.masalah_kulit}`
-                            );
-                          });
+                                `${dataNewUser.nama_produk}`
+                              );
+                              $("#modal-rekomendasi #usiaRekomendasi").html(
+                                `${dataNewUser.usia}`
+                              );
+                              $("#modal-rekomendasi #hargaRekomendasi").html(
+                                `${dataNewUser.harga}`
+                              );
+                              $("#modal-rekomendasi #deskripsiRekomendasi").html(
+                                `<strong>Deskripsi :</strong> ${dataNewUser.deskripsi_produk}`
+                              );
+                              $("#modal-rekomendasi #manfaatRekomendasi").html(
+                                `${dataNewUser.manfaat_produk}`
+                              );
+                              $("#modal-rekomendasi #masalahRekomendasi").html(
+                                `<strong>Masalah Kulit :</strong> ${dataNewUser.masalah_kulit}`
+                              );
+                          })
 
                           // Tambahkan kartu ke container
                           cardsContainer.appendChild(card);
 
                           $("#modal-pencarian").modal("hide");
-                        });
-                      });
+                        })
+                      })
+                    }
+                    
+                    
+
                   })
                   .catch((error) => {
                     console.error("Error", error);

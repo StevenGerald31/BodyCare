@@ -78,7 +78,7 @@
             role="tabpanel"
             aria-labelledby="pills-signin-tab"
           >
-            <form action="" method="POST">
+            <form action="/web/signIn" method="POST">
               <div class="mb-3">
                 <label for="exampleInputUsername" class="form-label fw-bold"
                   >Username</label
@@ -111,7 +111,7 @@
             role="tabpanel"
             aria-labelledby="pills-signup-tab"
           >
-            <form action="" method="POST">
+            <form action="/web/signUp" method="POST">
               <div class="mb-3">
                 <label for="exampleInputUsername" class="form-label fw-bold"
                   >Username</label
@@ -147,7 +147,7 @@
                   class="form-control"
                   id="exampleInputNohp"
                   aria-describedby="nohpHelp"
-                  name="nohp"
+                  name="no_hp"
                   placeholder="Masukan No.Hp"
                 />
               </div>
@@ -163,11 +163,41 @@
                   placeholder="Masukan Password 8 digit"
                 />
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
             </form>
           </div>
         </div>
       </div>
     </div>
+
+    <script>
+      document.getElementById('submitButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Menghentikan perilaku default dari tombol submit
+
+        // Mendapatkan nilai dari input
+        var username = document.getElementById('exampleInputUsername').value;
+        var password = document.getElementById('exampleInputPassword1').value;
+
+        console.log('username: ',username);
+        console.log('password: ',password);
+
+
+        // Membuat objek untuk menyimpan data
+        var data = {
+            username: username,
+            password: password
+        };
+
+        // Mengubah objek data menjadi string JSON
+        var jsonData = JSON.stringify(data);
+
+        // Menyimpan data ke dalam localStorage dengan kunci 'formData'
+        localStorage.setItem('formData', jsonData);
+
+        // Memberi tahu pengguna bahwa data telah disimpan
+        alert('Data telah disimpan ke dalam localStorage.');
+      });
+    </script>
+
   </body>
 </html>

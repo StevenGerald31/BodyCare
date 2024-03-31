@@ -4,6 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 
 const indexRouter = require("./routes/index");
 
@@ -14,6 +15,13 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// session
+app.use(session({
+  secret : 'bodycare',
+  resave: false,
+  saveUninitialized: false
+})); 
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

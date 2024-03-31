@@ -2,13 +2,23 @@ const getBaseUrl = require("../../utils/getBaseUrl");
 const { sequelize, Sequelize } = require("../../db");
 const SparqlClient = require("sparql-http-client");
 const admin = require("../model/admin-model")
+const user = require("../model/user-model")
 
 const pageDashboard = async (req, res) => {
   try {
+    if (!req.session.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const id_pelanggan = req.session.user.id_pelanggan; // Ambil id_pelanggan dari objek sesi
+
+    
+
     return res.render("dashboard", {
       baseUrl: getBaseUrl(req),
       session: req.session,
       user: req.user,
+      id_pelanggan: id_pelanggan
     });
   } catch (error) {
     console.log(error);
@@ -21,6 +31,9 @@ const pageDashboard = async (req, res) => {
 
 const pageFormUserBaru = async (req, res) => {
   try {
+    if (!req.session.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
     return res.render("formuserbaru", {
       baseUrl: getBaseUrl(req),
       session: req.session,
@@ -34,6 +47,89 @@ const pageFormUserBaru = async (req, res) => {
     });
   }
 };
+
+const dataMasalahKulit = async (req, res) => {
+  try {
+
+    if (!req.session.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    id_pelanggan = req.session.user.id_pelanggan
+
+    const masalah_kulit = req.body.masalah
+
+    const query = `
+    UPDATE info_pelanggan
+    SET masalah_kulit = :masalah_kulit
+    WHERE id_pelanggan = :id_pelanggan
+    ` 
+    const result = await sequelize.query(query, {
+      replacements: { masalah_kulit, id_pelanggan },
+      type: Sequelize.QueryTypes.UPDATE,
+    });
+
+    return result;
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Terjadi Kesalahan Sistem",
+    });
+  }
+}
+
+const rekomendasiUserNew = async (req,res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  pelanggan_id = req.session.user.id_pelanggan
+
+  const query = `
+  WITH bodycare_transaksi AS (
+    SELECT 
+        dt.id_produk,
+        dt.masalah_kulit,
+        dt.nama_produk,
+        dt.jenis_bodycare,
+        AVG(dtg.rating) AS avg_rating
+    FROM 
+        data_transaksi dtg
+    INNER JOIN 
+        data_bodycare dt ON dtg.id_produk = dt.id_produk
+    GROUP BY 
+        dt.id_produk, dt.masalah_kulit, dt.nama_produk, dt.jenis_bodycare
+    )
+
+    SELECT 
+        bt.id_produk,
+        bt.nama_produk,
+        bt.jenis_bodycare,
+        bt.masalah_kulit,
+        bt.avg_rating,
+        db.*
+    FROM 
+        bodycare_transaksi bt
+    INNER JOIN 
+        info_pelanggan ip ON bt.masalah_kulit = ip.masalah_kulit
+    INNER JOIN
+        data_bodycare db ON bt.id_produk = db.id_produk
+    WHERE 
+        ip.id_pelanggan = :pelanggan_id
+    ORDER BY 
+        bt.avg_rating DESC;
+  `;
+
+  const result = await sequelize.query(query, {
+    replacements: { pelanggan_id },
+    type: Sequelize.QueryTypes.SELECT,
+  });
+
+  // Mengirimkan hasil sebagai respons ke klien
+  res.status(200).json(result);
+}
 
 const pageSiginSigupUser = async (req, res) => {
   try {
@@ -50,6 +146,63 @@ const pageSiginSigupUser = async (req, res) => {
     });
   }
 };
+
+const signInUser = async (req, res) => {
+  const { username, password} = req.body; 
+
+  try {
+    const userLogin = await user.findOne({ where: { username, password}});
+    if (!userLogin) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // Simpan id_pelanggan ke dalam sesi
+    req.session.user = {
+      id_pelanggan: userLogin.id_pelanggan,
+      // Anda juga bisa menyimpan data lain yang dibutuhkan di sesi di sini
+    };
+
+    id_pelanggan = req.session.user.id_pelanggan
+    console.log("id_pelanggan", id_pelanggan)
+
+    // cek id_pelanggan sudah pernah rating atau belum
+    const query = `
+      SELECT *
+      FROM data_transaksi
+      WHERE id_pelanggan = :id_pelanggan
+    `;
+
+    const transaksi = await sequelize.query(query, {
+      replacements: { id_pelanggan },
+      type: Sequelize.QueryTypes.SELECT,
+    });
+
+    if (transaksi.length === 0) {
+      // Jika id_pelanggan tidak ada di tabel transaksi, redirect ke '/web/formuserbaru'
+      return res.redirect('/web/formuserbaru');
+    }
+
+    req.session.user = userLogin;
+    res.redirect('/web/dashboard'); // Redirect to dashboard route
+
+    return(id_pelanggan)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while logging in" });
+  }
+}
+
+const signUpUser = async (req,res) => {
+  const { username, alamat, no_hp, password } = req.body;
+
+  try {
+    const newUser = await user.creat({username, alamat, no_hp, password})
+    res.status(201).json({ message: "User created successfully", user: newUser });
+    console.log("new user: ", newUser)
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while creating user" });
+  }
+}
 
 const pageLogin = async (req, res) => {
   try {
@@ -93,7 +246,7 @@ const loginAdmin = async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    pageAdmin(req, res);
+    res.redirect("/web/admin?id=${adminuser.id_admin}")
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred while logging in" });
@@ -250,4 +403,4 @@ const hasilAlgoritma = async (req, res) => {
 };
 
 
-module.exports = { pageDashboard, pageLogin, pageFormUserBaru, pageAdmin, pageSiginSigupUser, loginAdmin, executeQueryByMerek, pencarian, dataTransaksi, dataAlgoritma, hasilAlgoritma };
+module.exports = { pageDashboard, pageLogin, pageFormUserBaru, pageAdmin, pageSiginSigupUser, signInUser, signUpUser, loginAdmin, executeQueryByMerek, pencarian, dataTransaksi, dataAlgoritma, hasilAlgoritma, dataMasalahKulit, rekomendasiUserNew };
