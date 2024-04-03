@@ -13,8 +13,8 @@ html {
 }
 
 .card {
-  height: 80%;
-  width: 80%; /* Sesuaikan dengan lebar maksimum yang diinginkan */
+  height: 60%;
+  width: 60%; /* Sesuaikan dengan lebar maksimum yang diinginkan */
   padding-left: 200px;
   padding-right: 200px;
   padding-top: 40px;
